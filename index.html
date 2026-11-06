@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Всемирный день науки — скидки до 50 000 ₽ · Universal University</title>
-<meta name="description" content="10–12 ноября: скидки до 50 000 ₽ на программы Британской высшей школы дизайна, Московской школы кино и Московской школы музыки по промокоду НАУКА.">
+<meta name="description" content="10–12 ноября: скидки до 50 000 ₽ на программы школ Universal University по промокоду НАУКА.">
 <meta property="og:title" content="А что, если получится? Скидки до 50 000 ₽ · 10–12 ноября">
 <meta property="og:description" content="Всемирный день науки в Universal University: промокод НАУКА.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -188,9 +188,9 @@ input.err{border-bottom-color:#D7261E;color:#D7261E}
 input[type=range]{width:100%;accent-color:#000;height:30px}
 .range-l{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2);letter-spacing:.06em}
 .tiers{display:grid;grid-template-columns:repeat(5,1fr);margin-top:30px;border:2px solid var(--ink)}
-.tier{padding:14px 6px;text-align:center;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);border-right:2px solid var(--ink);transition:.2s}
+.tier{padding:14px 4px;text-align:center;font-size:10px;line-height:1.3;letter-spacing:.02em;text-transform:none;color:var(--ink-2);border-right:2px solid var(--ink);transition:.2s}
 .tier:last-child{border-right:0}
-.tier b{display:block;font-size:17px;color:var(--ink);letter-spacing:.02em}
+.tier b{display:block;margin-bottom:4px;font-size:17px;color:var(--ink);letter-spacing:.02em}
 .tier.on{background:var(--ink);color:#ccc}.tier.on b{color:#fff}
 .calc-out{display:flex;flex-direction:column}
 .row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;border-top:2px solid var(--ink);padding:22px 0}
@@ -269,7 +269,8 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 .sticky-cta .t{flex:1;font-size:12px;letter-spacing:.08em;text-transform:uppercase;line-height:1.35}
 .sticky-cta .t b{font-variant-numeric:tabular-nums}
 .sticky-cta .btn{padding:14px 16px;font-size:12px}
-@media(max-width:760px){.sticky-cta{display:flex}.fab{bottom:84px!important}}
+@media(max-width:760px){.sticky-cta{display:flex}.fab{bottom:84px!important;right:12px}.fab-main{display:none}}
+.sticky-cta .btn.ghost{background:transparent;color:#fff;border-color:#fff}
 .fab{position:fixed;right:22px;bottom:26px;z-index:69;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
 .fab-main{height:58px;padding:0 22px;background:var(--ink);color:#fff;border:2px solid var(--ink);cursor:pointer;font:600 13px var(--b);letter-spacing:.12em;text-transform:uppercase}
 .fab-main:hover{background:var(--blue);border-color:var(--blue)}
@@ -352,11 +353,16 @@ footer{background:var(--bg-2);padding:70px 0 130px}
         <div class="f"><input type="text" name="name" placeholder="Как вас зовут" autocomplete="given-name" required></div>
         <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required></div>
         <div class="f">
-          <select name="school">
-            <option value="">Какая школа интересует?</option>
-            <option>Британская высшая школа дизайна</option>
-            <option>Московская школа кино</option>
-            <option>Московская школа музыки</option>
+          <select name="direction">
+            <option value="">Какое направление вас интересует?</option>
+            <option>Искусство</option>
+            <option>Дизайн</option>
+            <option>Маркетинг</option>
+            <option>Музыка</option>
+            <option>Кино</option>
+            <option>Архитектура</option>
+            <option>Анимация</option>
+            <option>Игры</option>
             <option>Пока не знаю — помогите выбрать</option>
           </select>
         </div>
@@ -460,10 +466,15 @@ footer{background:var(--bg-2);padding:70px 0 130px}
       <div class="q-step on" data-step="0">
         <div class="qq">Что вам ближе всего?</div>
         <div class="q-opts">
-          <button data-v="design">Визуал: графика, интерфейсы, пространство</button>
-          <button data-v="film">Истории: кино, сценарии, видео</button>
-          <button data-v="music">Звук: музыка, продюсирование</button>
-          <button data-v="any">Хочу попробовать всё и понять своё</button>
+          <button data-v="Дизайн">Дизайн: графика, интерфейсы, интерьер, мода</button>
+          <button data-v="Искусство">Искусство, кураторство, арт-проекты</button>
+          <button data-v="Кино">Кино: режиссура, сценарий, съёмка</button>
+          <button data-v="Музыка">Музыка, звук, продюсирование</button>
+          <button data-v="Архитектура">Архитектура и городская среда</button>
+          <button data-v="Анимация">Анимация, 3D, моушн</button>
+          <button data-v="Игры">Игры: геймдизайн, концепт-арт</button>
+          <button data-v="Маркетинг">Маркетинг и бренды в креативных индустриях</button>
+          <button data-v="any">Пока не знаю — хочу понять своё</button>
         </div>
       </div>
       <div class="q-step" data-step="1">
@@ -527,11 +538,11 @@ footer{background:var(--bg-2);padding:70px 0 130px}
         <input type="range" id="c-range" min="50000" max="1000000" step="5000" value="350000" aria-label="Ползунок стоимости">
         <div class="range-l"><span>50 000 ₽</span><span>1 000 000 ₽</span></div>
         <div class="tiers" id="tiers">
-          <div class="tier"><b>10 000</b>до 100 т.</div>
-          <div class="tier"><b>20 000</b>до 200 т.</div>
-          <div class="tier"><b>30 000</b>до 400 т.</div>
-          <div class="tier"><b>40 000</b>до 700 т.</div>
-          <div class="tier"><b>50 000</b>от 700 т.</div>
+          <div class="tier"><b>10 000</b>до 100 000 ₽</div>
+          <div class="tier"><b>20 000</b>до 200 000 ₽</div>
+          <div class="tier"><b>30 000</b>до 400 000 ₽</div>
+          <div class="tier"><b>40 000</b>до 700 000 ₽</div>
+          <div class="tier"><b>50 000</b>от 700 000 ₽</div>
         </div>
         <p class="note">Шкала демонстрационная: точный размер скидки зависит от условий акции и конкретной программы.</p>
       </div>
@@ -583,7 +594,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
     </div>
     <div class="steps reveal">
       <div class="step"><h3>Выберите программу</h3><p>На карте направлений выше или вместе с консультантом.</p></div>
-      <div class="step"><h3>Перейдите на сайт школы</h3><p>Британки, МШК или МШМ — ссылки ниже.</p></div>
+      <div class="step"><h3>Перейдите на сайт школы</h3><p>Нужного направления — ссылки на все школы ниже.</p></div>
       <div class="step"><h3>Подайте заявку</h3><p>Строго в период акции: 10–12 ноября 2026.</p></div>
       <div class="step key"><h3>Назовите промокод</h3><p>Консультанту при оформлении. Без него скидка не применяется.</p></div>
     </div>
@@ -602,6 +613,9 @@ footer{background:var(--bg-2);padding:70px 0 130px}
       <a class="school" href="https://britishdesign.ru" target="_blank" rel="noopener" data-goal="go_britishdesign"><h3>Британская высшая школа дизайна</h3><div class="bot"><span>britishdesign.ru</span><span class="arr">↗</span></div></a>
       <a class="school" href="https://moscowfilmschool.ru" target="_blank" rel="noopener" data-goal="go_mfs"><h3>Московская школа кино</h3><div class="bot"><span>moscowfilmschool.ru</span><span class="arr">↗</span></div></a>
       <a class="school" href="https://moscowmusicschool.ru" target="_blank" rel="noopener" data-goal="go_mms"><h3>Московская школа музыки</h3><div class="bot"><span>moscowmusicschool.ru</span><span class="arr">↗</span></div></a>
+      <a class="school" href="https://screamschool.ru" target="_blank" rel="noopener" data-goal="go_scream"><h3>Scream School</h3><div class="bot"><span>screamschool.ru</span><span class="arr">↗</span></div></a>
+      <a class="school" href="https://march.ru" target="_blank" rel="noopener" data-goal="go_march"><h3>Архитектурная школа МАРШ</h3><div class="bot"><span>march.ru</span><span class="arr">↗</span></div></a>
+      <a class="school" href="https://msca.ru" target="_blank" rel="noopener" data-goal="go_msca"><h3>Московская школа современного искусства</h3><div class="bot"><span>msca.ru</span><span class="arr">↗</span></div></a>
     </div>
   </div>
 </section>
@@ -630,7 +644,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
     <div class="reveal">
       <div class="caps" style="opacity:.7">Финал · Проверить можно только одним способом</div>
       <h2 style="margin-top:20px">Поставьте свой <span class="outline">эксперимент</span></h2>
-      <p class="lead" style="margin-top:24px;opacity:.85">Через 3 дня скидки закончатся. Оставьте заявку — закрепим за вами промокод и поможем выбрать программу.</p>
+      <p class="lead" style="margin-top:24px;opacity:.85">12 ноября в 23:59 (мск) скидки закончатся. Оставьте заявку — закрепим за вами промокод и поможем выбрать программу.</p>
     </div>
     <div class="box reveal">
       <span class="caps-b">До 50 000 ₽</span>
@@ -678,7 +692,8 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 <!-- Плавающие элементы -->
 <div class="sticky-cta" id="sticky">
   <div class="t">Скидка до 50 000 ₽<br><b id="sticky-cd">--:--:--</b></div>
-  <a class="btn inv" href="#lead" data-goal="sticky_cta">Забронировать</a>
+  <button class="btn ghost" type="button" id="sticky-contact" data-goal="sticky_contact">Связь</button>
+  <a class="btn inv" href="#lead" data-goal="sticky_cta">Бронь</a>
 </div>
 
 <div class="fab" id="fab">
@@ -748,7 +763,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 
   /* ─── Направления (сетка как на u.university) ─── */
   const dirs=[
-    {t:'Искусство',s:'design',d:'Современное искусство, живопись, иллюстрация и арт-практики.',l:['Современное искусство','Иллюстрация','Арт-менеджмент']},
+    {t:'Искусство',s:'art',d:'Современное искусство, живопись, иллюстрация, кураторство и управление арт-проектами.',l:['Современное искусство','Кураторство','Арт-менеджмент']},
     {t:'Дизайн',s:'design',d:'Графический, интерьерный, предметный дизайн, мода и интерфейсы.',l:['Графический дизайн','Дизайн интерьера','UX/UI','Мода']},
     {t:'Маркетинг',s:'design',d:'Бренд-коммуникации, креатив в рекламе и продвижение в креативных индустриях.',l:['Бренд-менеджмент','Креатив в рекламе','Digital']},
     {t:'Музыка',s:'music',d:'Саунд-продюсирование, сонграйтинг, вокал и звукорежиссура.',l:['Саунд-продюсер','Сонграйтинг','Звукорежиссура']},
@@ -766,7 +781,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
     $('#d-num').textContent=pad(cur+1); $('#d-title').textContent=d.t; $('#d-text').textContent=d.d;
     $('#d-list').innerHTML=d.l.map(x=>`<li>${x}</li>`).join(''); }
   $('#d-prev').onclick=()=>show(cur-1); $('#d-next').onclick=()=>show(cur+1); show(0);
-  $('#d-cta').addEventListener('click',()=>{ const s=$('#lead select'); const d=dirs[cur]; if(s) s.value=d.s==='film'?'Московская школа кино':d.s==='music'?'Московская школа музыки':'Британская высшая школа дизайна'; });
+  $('#d-cta').addEventListener('click',()=>{ const s=$('#lead select'); if(s) s.value=dirs[cur].t; });
 
   /* ─── Квиз ─── */
   const ans=[], steps=$$('.q-step'), bars=$$('.q-progress i');
@@ -775,12 +790,10 @@ footer{background:var(--bg-2);padding:70px 0 130px}
     if(steps[i+1]) steps[i+1].classList.add('on'); else result(); goal('quiz_step_'+(i+1));
   })));
   function result(){
-    const map={design:['Британская высшая школа дизайна','Графика, интерфейсы, среда, мода, иллюстрация — самый широкий выбор программ.'],
-               film:['Московская школа кино','Режиссура, сценарий, продюсирование и операторское мастерство.'],
-               music:['Московская школа музыки','Продюсирование, сонграйтинг, вокал и звукорежиссура.'],
-               any:['Сначала — консультация','Консультант покажет программы трёх школ и поможет сузить выбор.']};
     const lvl={zero:'Подберём программу для старта с нуля.',hobby:'Поможем превратить хобби в профессию.',pro:'Покажем программы для роста в профессии.',switch:'Расскажем о программах для смены профессии.'};
-    const r=map[ans[0]]||map.any; $('#q-match').textContent=r[0]; $('#q-why').textContent=r[1]+' '+(lvl[ans[1]]||'');
+    const d=dirs.find(x=>x.t===ans[0]);
+    $('#q-match').textContent=d?d.t:'Сначала — консультация';
+    $('#q-why').textContent=(d?d.d:'Консультант покажет направления всех школ Universal University и поможет сузить выбор.')+' '+(lvl[ans[1]]||'');
     $('#q-res [name=quiz]').value=ans.join(' / '); $('#q-res').classList.add('on'); goal('quiz_done',{answers:ans.join('/')});
   }
   $('#q-restart').addEventListener('click',e=>{e.preventDefault(); ans.length=0; $('#q-res').classList.remove('on'); steps.forEach(s=>s.classList.remove('on')); steps[0].classList.add('on'); bars.forEach(b=>b.classList.remove('on'));});
@@ -788,12 +801,11 @@ footer{background:var(--bg-2);padding:70px 0 130px}
   /* ─── Калькулятор ─── */
   const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/ |,/g,' ')+' ₽';
   const tiers=[[100000,10000],[200000,20000],[400000,30000],[700000,40000],[Infinity,50000]];
-  const equiv={10000:'Это как пара месяцев курсов английского.',20000:'Это как хороший графический планшет.',30000:'Это как месяц аренды комнаты в большом городе.',40000:'Это как билеты на море и обратно.',50000:'Это как новый ноутбук для учёбы.'};
   const inp=$('#c-price'), rng=$('#c-range');
   function calc(v){ v=Math.max(0,v||0); const idx=tiers.findIndex(t=>v<t[0]); const disc=v>=50000?tiers[idx][1]:0;
     $('#o-price').textContent=fmt(v); $('#o-disc').textContent='−'+fmt(disc); $('#o-total').textContent=fmt(v-disc);
     $$('#tiers .tier').forEach((t,i)=>t.classList.toggle('on',i===idx&&disc>0));
-    $('#o-equiv').textContent=disc?equiv[disc]:'Акция действует для программ от 50 000 ₽.';
+    $('#o-equiv').textContent=disc?'':'Акция действует для программ от 50 000 ₽.';
     $('#calc-cta').textContent=disc?`Зафиксировать скидку −${fmt(disc)}`:'Узнать условия'; }
   inp.addEventListener('input',()=>{ const v=parseInt(inp.value.replace(/\D/g,''))||0; inp.value=v?v.toLocaleString('ru-RU'):''; rng.value=Math.min(1000000,Math.max(50000,v)); calc(v); });
   rng.addEventListener('input',()=>{ const v=+rng.value; inp.value=v.toLocaleString('ru-RU'); calc(v); });
@@ -844,6 +856,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 
   /* ─── FAB, sticky, анимации, скролл ─── */
   $('#fab-btn').addEventListener('click',()=>$('#fab').classList.toggle('open'));
+  $('#sticky-contact').addEventListener('click',()=>$('#fab').classList.toggle('open'));
   const sticky=$('#sticky'); addEventListener('scroll',()=>sticky.classList.toggle('show',scrollY>innerHeight*.9),{passive:true});
   const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('in'); io.unobserve(en.target);} }),{threshold:.1});
   $$('.reveal').forEach(el=>io.observe(el));
