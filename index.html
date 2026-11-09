@@ -462,6 +462,10 @@ select{padding-right:30px;text-overflow:ellipsis}
 .stats .stat span{font-size:clamp(16px,1.3vw,20px);color:var(--ink-2)}
 @media(max-width:600px){.stats .stat b{font-size:clamp(52px,16vw,72px)}}
 .price-input{gap:8px}.price-input span{flex:none}
+/* направления: единый размер шрифта для всех строк */
+.dir .w,.dir .w:not(.long){font-size:clamp(40px,5.2vw,86px);line-height:1.05;white-space:normal}
+@media(max-width:600px){.dir .w,.dir .w:not(.long){font-size:clamp(34px,11.5vw,56px)}}
+.dir{align-items:center}
 </style>
 </head>
 <body>
@@ -907,7 +911,7 @@ select{padding-right:30px;text-overflow:ellipsis}
   ];
   const box=$('#dirs'); let cur=0;
   dirs.forEach((d,i)=>{ const el=document.createElement('button'); el.className='dir';
-    el.innerHTML=`<span class="w${d.t.length>12?' long':''}">${d.t}</span><span class="n">${pad(i+1)}</span>`;
+    el.innerHTML=`<span class="w">${d.t}</span><span class="n">${pad(i+1)}</span>`;
     el.addEventListener('click',()=>{show(i);goal('direction_click',{dir:d.t}); $('.dir-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}); box.appendChild(el); });
   function show(i){ cur=(i+dirs.length)%dirs.length; const d=dirs[cur];
     const pnl=$('.dir-panel'); if(pnl && !RM){ pnl.classList.add('swap'); setTimeout(()=>pnl.classList.remove('swap'),120); }
