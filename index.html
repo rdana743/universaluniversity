@@ -879,7 +879,8 @@ select{padding-right:30px;text-overflow:ellipsis}
     $$('.cd-title').forEach(e=>e.textContent=titles[phase]);
     let d=0,h=0,m=0,s=0;
     if(target){ const diff=Math.max(0,target-now)/1000; d=Math.floor(diff/86400); h=Math.floor(diff%86400/3600); m=Math.floor(diff%3600/60); s=Math.floor(diff%60); }
-    const short=(d?d+'д ':'')+pad(h)+':'+pad(m)+':'+pad(s);
+    const dw=n=>{ const a=n%10, b=n%100; return (a===1&&b!==11)?'день':(a>=2&&a<=4&&(b<12||b>14))?'дня':'дней'; };
+    const short=(d?d+'\u00a0'+dw(d)+' ':'')+pad(h)+':'+pad(m)+':'+pad(s);
     $('#tb-cd').textContent=short; $('#sticky-cd').textContent=(phase==='over'?'акция завершена':'до конца '+short);
     const setD=(el,v)=>{ v=String(v); if(el.textContent!==v){ el.textContent=v; el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); } };
     $$('.cd-big').forEach(b=>{ setD($('[data-u=d]',b),d); setD($('[data-u=h]',b),pad(h)); setD($('[data-u=m]',b),pad(m)); setD($('[data-u=s]',b),pad(s)); });
