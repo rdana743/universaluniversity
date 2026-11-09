@@ -549,6 +549,11 @@ select{padding-right:30px;text-overflow:ellipsis}
 .school-head{flex-direction:column;align-items:flex-start;gap:14px}
 .school-head .lead{font-size:clamp(20px,2vw,30px);margin:0}
 .school-head .lead b{font-weight:700;letter-spacing:.02em}
+/* подвал: без нижней строки, контакты по правому краю */
+.foot{border-bottom:0;padding-bottom:0}
+footer{padding-bottom:70px}
+.foot>div:last-child{text-align:right}
+@media(max-width:800px){.foot>div:last-child{text-align:left}footer{padding-bottom:110px}}
 </style>
 </head>
 <body>
@@ -748,8 +753,7 @@ select{padding-right:30px;text-overflow:ellipsis}
 <section id="faq" style="padding-top:0">
   <div class="wrap">
     <div class="reveal" style="margin-bottom:44px">
-      <div class="caps muted">Частые вопросы</div>
-      <h2 style="margin-top:20px">Остались сомнения?</h2>
+      <h2>Вопрос-ответ</h2>
     </div>
     <div class="faq reveal">
       <details open><summary>Как получить скидку?</summary><p>Подайте заявку на сайте школы с 10 по 12 ноября 2026 года включительно и назовите консультанту промокод НАУКА. Можно оставить заявку на этой странице заранее — мы перезвоним и всё оформим в дни акции.</p></details>
@@ -771,7 +775,6 @@ select{padding-right:30px;text-overflow:ellipsis}
       <div><p>Центр дизайна Artplay<br>ул. Нижняя Сыромятническая, д. 10, стр. 3, Москва</p></div>
       <div><a href="tel:88007778535">8 800 777-85-35</a><a href="tel:84956403092">8 495 640-30-92</a><a href="mailto:info@u.university">info@u.university</a></div>
     </div>
-    <div class="foot-b caps"><span>Всемирный день науки · 2026</span><span>Проверено на практике</span></div>
   </div>
 </footer>
 
