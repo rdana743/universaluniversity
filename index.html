@@ -403,7 +403,6 @@ footer{background:var(--bg-2);padding:70px 0 130px}
           <button data-ans="no">Нет, разного</button>
         </div>
         <div class="exp-res" id="exp-res"></div>
-        <div class="caps muted" style="margin-top:18px;font-size:12px">Результат: после ответа</div>
       </div>
     </div>
   </div>
@@ -758,7 +757,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
   /* ─── Эксперимент ─── */
   $$('#exp [data-ans]').forEach(b=>b.addEventListener('click',()=>{
     const ok=b.dataset.ans==='yes';
-    $('#exp-res').innerHTML=(ok?'<b>Верно.</b> ':'<b>Мозг вас обманул.</b> ')+'Квадраты абсолютно одинаковые — разным цвет кажется из-за фона. Дизайнеры, режиссёры и звукорежиссёры учатся управлять таким восприятием. <a href="#quiz">Узнать, какое направление ваше →</a>';
+    $('#exp-res').innerHTML=(ok?'<b>Верно.</b> ':'<b>Мозг вас обманул.</b> ')+'Квадраты абсолютно одинаковые — разным цвет кажется из-за фона. Дизайнеры, режиссёры и звукорежиссёры учатся управлять таким восприятием.';
     $('#exp').classList.add('revealed'); goal('experiment_answer',{answer:b.dataset.ans});
   }));
 
