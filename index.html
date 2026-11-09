@@ -566,7 +566,6 @@ select{padding-right:30px;text-overflow:ellipsis}
     <nav class="nav-links caps">
       <a href="#how">Как получить</a>
       <a href="#directions">Направления</a>
-      <a href="#quiz">Подбор программы</a>
       <a href="#calc">Калькулятор</a>
       <a href="#faq">Вопросы</a>
     </nav>
@@ -686,74 +685,6 @@ select{padding-right:30px;text-overflow:ellipsis}
     </div></aside>
     </div>
     <p class="note">Скидка действует на все программы 1–2 семестра 2026/27 учебного года вне зависимости от даты старта.</p>
-  </div>
-</section>
-
-<!-- ═══ Квиз-подбор ═══ -->
-<section id="quiz" style="padding-top:0">
-  <div class="wrap">
-    <div class="quiz reveal">
-      <div class="caps muted">Подбор за 3 вопроса</div>
-      <h2 style="margin-top:20px">Какой эксперимент ваш?</h2>
-      <p class="lead muted" style="margin-top:16px">Ответьте на 3 вопроса — подскажем направление и закрепим за вами скидку.</p>
-      <div class="q-progress"><i></i><i></i><i></i></div>
-
-      <div class="q-step on" data-step="0">
-        <div class="qq">Что вам ближе всего?</div>
-        <div class="q-opts">
-          <button data-v="Дизайн">Дизайн: графика, интерфейсы, интерьер, мода</button>
-          <button data-v="Искусство">Искусство, кураторство, арт-проекты</button>
-          <button data-v="Кино">Кино: режиссура, сценарий, съёмка</button>
-          <button data-v="Музыка">Музыка, звук, продюсирование</button>
-          <button data-v="Архитектура">Архитектура и городская среда</button>
-          <button data-v="Анимация">Анимация, 3D, моушн</button>
-          <button data-v="Игры">Игры: геймдизайн, концепт-арт</button>
-          <button data-v="Бизнес и маркетинг">Бизнес и маркетинг</button>
-          <button data-v="any">Пока не знаю — хочу понять своё</button>
-        </div>
-      </div>
-      <div class="q-step" data-step="1">
-        <div class="qq">Какой у вас опыт?</div>
-        <div class="q-opts">
-          <button data-v="zero">Нулевой, начинаю с чистого листа</button>
-          <button data-v="hobby">Занимаюсь для себя</button>
-          <button data-v="pro">Уже работаю в сфере, хочу расти</button>
-          <button data-v="switch">Работаю в другой сфере, хочу сменить профессию</button>
-        </div>
-      </div>
-      <div class="q-step" data-step="2">
-        <div class="qq">Какой формат удобнее?</div>
-        <div class="q-opts">
-          <button data-v="short">Короткий курс на несколько месяцев</button>
-          <button data-v="long">Полноценная программа на 1–2 года</button>
-          <button data-v="online">Онлайн, совмещаю с работой</button>
-          <button data-v="unsure">Пока не знаю, нужна консультация</button>
-        </div>
-      </div>
-
-      <div class="q-res" id="q-res">
-        <div>
-          <div class="caps muted">Результат эксперимента</div>
-          <div class="match" id="q-match">—</div>
-          <p id="q-why" class="lead" style="font-size:19px"></p>
-          <p style="margin-top:24px"><a href="#" id="q-restart" class="restart">Пройти заново</a></p>
-        </div>
-        <div class="box">
-          <span class="caps-b">Подборка готова</span>
-          <h3>Получите список программ со скидкой</h3>
-          <p class="s">Консультант пришлёт подходящие программы и подтвердит размер скидки по промокоду НАУКА.</p>
-          <form class="lead-form" autocomplete="on" data-source="quiz" novalidate>
-            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
-            <input type="hidden" name="quiz">
-            <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
-            <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
-            <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных</label>
-            <button class="btn accent full" type="submit">Получить подборку</button>
-          </form>
-          <div class="form-ok"><div class="big">Готово</div><p>Скоро пришлём подборку. Промокод:</p><div class="code">НАУКА</div></div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1000,7 +931,7 @@ select{padding-right:30px;text-overflow:ellipsis}
     $('#q-why').textContent=typo((d?d.d:'Консультант покажет направления всех школ Universal University и поможет сузить выбор.')+' '+(lvl[ans[1]]||''));
     $('#q-res [name=quiz]').value=ans.join(' / '); $('#q-res').classList.add('on'); goal('quiz_done',{answers:ans.join('/')});
   }
-  $('#q-restart').addEventListener('click',e=>{e.preventDefault(); ans.length=0; $('#q-res').classList.remove('on'); steps.forEach(s=>s.classList.remove('on')); steps[0].classList.add('on'); bars.forEach(b=>b.classList.remove('on'));});
+  $('#q-restart') && $('#q-restart').addEventListener('click',e=>{e.preventDefault(); ans.length=0; $('#q-res').classList.remove('on'); steps.forEach(s=>s.classList.remove('on')); steps[0].classList.add('on'); bars.forEach(b=>b.classList.remove('on'));});
 
   /* ─── Калькулятор ─── */
   const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/[\s,]/g,'\u00a0')+'\u00a0₽';
