@@ -328,6 +328,61 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 .foot a.logo{line-height:1;display:inline-block}
 .stat b{font-size:clamp(40px,4.2vw,72px)}
 .dir .w.long{font-size:clamp(28px,3.7vw,58px);white-space:nowrap}
+
+/* ═══ АДАПТИВ: защита от горизонтального переполнения ═══ */
+html,body{overflow-x:hidden}
+.hero-grid>*,.h001>*,.calc>*,.final-grid>*,.q-res>*,.dirs>*,.dir-panel>*,.stats>*,.steps>*,.words>*,.schools>*,.foot>*,.reviews>*{min-width:0}
+.hero-grid{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+.h001{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.calc{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.dirs{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.tiers{grid-template-columns:repeat(6,minmax(0,1fr))}
+.tier{overflow:hidden}
+.price-input input{min-width:0}
+.btn{white-space:normal;text-align:center;line-height:1.25}
+.stat b{overflow-wrap:normal}
+@media(max-width:1000px){.hero-grid{grid-template-columns:minmax(0,1fr)}.dir-panel{grid-template-columns:minmax(0,1fr)}.dir-panel .act{min-width:0}}
+@media(max-width:900px){.h001,.calc,.final-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:800px){.dirs{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){
+  section{padding:72px 0}
+  .tiers{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .tier:nth-child(3n){border-right:0}
+  .tier:nth-child(-n+3){border-bottom:2px solid var(--ink)}
+  .calc-out{padding:0}
+  .row{gap:12px}
+  .row .v{font-size:22px;white-space:nowrap}
+  .row.total .v{font-size:34px}
+  .row .caps{font-size:12px}
+  .price-input input{font-size:44px}
+  .price-input span{font-size:30px}
+  .h001 .q{font-size:clamp(44px,13vw,64px)}
+  .box,.exp{padding:22px}
+  .cd-big b{font-size:26px}
+  .meta{gap:14px 24px}
+  .cta-row .btn{width:100%}
+  .btn{padding:18px 20px}
+  .stat b{font-size:clamp(30px,9vw,44px)}
+  .promo{padding:30px 22px}
+  .promo .btn{width:100%}
+  .strip{padding:26px 22px}
+  .strip .btn{width:100%}
+  .dir-panel{padding:24px 22px;gap:20px}
+  .quiz{padding:30px 20px}
+  .faq summary{font-size:18px;padding:22px 0}
+  .terms li{grid-template-columns:44px 1fr;font-size:16px}
+  .school{min-height:150px}
+  .sec-head{margin-bottom:30px;padding-bottom:24px}
+}
+.answers{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.answers button{padding:14px 8px;letter-spacing:.06em;font-size:13px}}
+@media(max-width:420px){.dir .w.long{font-size:clamp(22px,7.4vw,30px)}.dir{gap:10px}}
+.dir .n{flex:none}
+@media(max-width:600px){.dir .w:not(.long){font-size:clamp(34px,11.5vw,56px)}}
+select{padding-right:30px;text-overflow:ellipsis}
+@media(max-width:600px){select{font-size:15px}}
+@media(max-width:900px){.stats{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px 30px}.stat b{font-size:clamp(28px,4.6vw,44px)}}
+@media(max-width:600px){.stats{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -847,7 +902,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
   $('#q-restart').addEventListener('click',e=>{e.preventDefault(); ans.length=0; $('#q-res').classList.remove('on'); steps.forEach(s=>s.classList.remove('on')); steps[0].classList.add('on'); bars.forEach(b=>b.classList.remove('on'));});
 
   /* ─── Калькулятор ─── */
-  const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/ |,/g,' ')+' ₽';
+  const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/[\s,]/g,'\u00a0')+'\u00a0₽';
   const tiers=[[100000,5000],[200000,10000],[300000,20000],[400000,30000],[500000,40000],[Infinity,50000]];
   const inp=$('#c-price'), rng=$('#c-range');
   function calc(v){ v=Math.max(0,v||0); const idx=tiers.findIndex(t=>v<t[0]); const disc=v>0?Math.min(v,tiers[idx][1]):0;
