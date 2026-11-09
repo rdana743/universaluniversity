@@ -31,7 +31,7 @@ function cors(origin, allowed) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const allowed = (env.ALLOWED_ORIGINS || '').split(',').map((s) => s.trim()).filter(Boolean);
     const origin = request.headers.get('Origin') || '';
     const headers = cors(origin, allowed);
@@ -42,7 +42,7 @@ export default {
 
     let d;
     try {
-      d = await request.json();
+      d = JSON.parse(await request.text());
     } catch {
       return new Response('Bad JSON', { status: 400, headers });
     }
@@ -72,18 +72,32 @@ export default {
       d.page ? `<b>Страница:</b> ${esc(d.page)}` : null,
     ].filter((l) => l !== null);
 
-    const tg = await fetch(`https://api.telegram.org/bot${env.TG_TOKEN}/sendMessage`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: env.TG_CHAT_ID,
-        text: lines.join('\n'),
-        parse_mode: 'HTML',
-        disable_web_page_preview: true,
-      }),
-    });
+    const send = async () => {
+      // до 3 попыток: если Telegram на секунду недоступен, заявка не потеряется
+      for (let i = 0; i < 3; i++) {
+        try {
+          const tg = await fetch(`https://api.telegram.org/bot${env.TG_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: env.TG_CHAT_ID,
+              text: lines.join('\n'),
+              parse_mode: 'HTML',
+              disable_web_page_preview: true,
+            }),
+          });
+          if (tg.ok) return;
+          console.error('Telegram error', tg.status, await tg.text());
+        } catch (e) {
+          console.error('Telegram fetch failed', e);
+        }
+        await new Promise((r) => setTimeout(r, 800 * (i + 1)));
+      }
+      console.error('LEAD NOT DELIVERED', lines.join(' | '));
+    };
 
-    if (!tg.ok) return new Response('Telegram error', { status: 502, headers });
+    // отвечаем странице сразу, а отправку в Telegram доделываем в фоне
+    ctx.waitUntil(send());
     return new Response(JSON.stringify({ ok: true }), {
       status: 200,
       headers: { ...headers, 'Content-Type': 'application/json' },

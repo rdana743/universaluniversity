@@ -1001,7 +1001,7 @@ select{padding-right:30px;text-overflow:ellipsis}
     if(!LEAD_ENDPOINT){ console.warn('LEAD_ENDPOINT не задан — заявка не отправлена',data); return; }
     const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),12000);
     try{
-      const r=await fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:ctrl.signal});
+      const r=await fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(data),keepalive:true,signal:ctrl.signal});
       if(!r.ok) throw new Error('HTTP '+r.status);
     } finally { clearTimeout(t); }
   }
