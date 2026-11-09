@@ -383,6 +383,69 @@ select{padding-right:30px;text-overflow:ellipsis}
 @media(max-width:600px){select{font-size:15px}}
 @media(max-width:900px){.stats{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px 30px}.stat b{font-size:clamp(28px,4.6vw,44px)}}
 @media(max-width:600px){.stats{grid-template-columns:minmax(0,1fr)}}
+
+/* ═══ АНИМАЦИИ ═══ */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:0 50%;z-index:300;pointer-events:none}
+/* заголовок первого экрана */
+.wm{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.wm>span{display:inline-block;transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.75,.15,1)}
+.loaded .wm>span{transform:none}
+.hero .lead,.hero .meta,.hero .cta-row,.hero .micro,.hero .box{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.75,.15,1)}
+.loaded .hero .lead,.loaded .hero .meta,.loaded .hero .cta-row,.loaded .hero .micro,.loaded .hero .box{opacity:1;transform:none}
+.loaded .hero .lead{transition-delay:.35s}.loaded .hero .lead+.lead{transition-delay:.45s}
+.loaded .hero .meta{transition-delay:.55s}.loaded .hero .cta-row{transition-delay:.65s}.loaded .hero .micro{transition-delay:.7s}
+.loaded .hero .box{transition-delay:.5s}
+/* линии рисуются слева направо */
+.sec-head{border-bottom:0;position:relative}
+.sec-head::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--rule);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.1s cubic-bezier(.2,.75,.15,1) .15s}
+.sec-head.in::after{transform:none}
+.meta{position:relative}
+/* направления: строки появляются каскадом, на наведении слово смещается */
+.dirs .dir{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,.75,.15,1),background .2s}
+.dirs.in .dir{opacity:1;transform:none}
+.dirs.in .dir:nth-child(1){transition-delay:.05s}.dirs.in .dir:nth-child(2){transition-delay:.1s}
+.dirs.in .dir:nth-child(3){transition-delay:.15s}.dirs.in .dir:nth-child(4){transition-delay:.2s}
+.dirs.in .dir:nth-child(5){transition-delay:.25s}.dirs.in .dir:nth-child(6){transition-delay:.3s}
+.dirs.in .dir:nth-child(7){transition-delay:.35s}.dirs.in .dir:nth-child(8){transition-delay:.4s}
+.dir .w{transition:color .25s,transform .45s cubic-bezier(.2,.75,.15,1)}
+.dir:hover .w{transform:translateX(10px)}
+.dir .n{transition:color .2s,transform .3s}
+.dir:hover .n{color:var(--blue);transform:translateX(-4px)}
+.dir-panel{transition:opacity .25s}
+.dir-panel.swap{opacity:.35}
+/* три слова: снизу вверх по очереди */
+.words.in .word:nth-child(2){transition-delay:.1s}.words.in .word:nth-child(3){transition-delay:.2s}
+.words .word{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .8s cubic-bezier(.2,.75,.15,1)}
+.words.in .word{opacity:1;transform:none}
+/* таймер: мягкий тик */
+.cd-big b.tick{animation:tick .45s cubic-bezier(.2,.75,.15,1)}
+@keyframes tick{from{transform:translateY(-35%);opacity:.2}to{transform:none;opacity:1}}
+/* промокод: буквы поднимаются */
+#promo-code{overflow:hidden;display:block}
+#promo-code span{display:inline-block;transform:translateY(100%);transition:transform .8s cubic-bezier(.2,.75,.15,1)}
+.promo.in #promo-code span{transform:none}
+/* кнопки: стрелки и подчёркивания */
+.btn{transition:background .2s,color .2s,border-color .2s,transform .2s}
+.btn:active{transform:scale(.98)}
+.q-opts button{background:linear-gradient(var(--ink),var(--ink)) no-repeat 0 100%/0 2px;transition:background-size .45s cubic-bezier(.2,.75,.15,1),color .2s}
+.q-opts button:hover{background-size:100% 2px}
+/* карточки школ: заливка поднимается снизу */
+.school{position:relative;overflow:hidden;z-index:0;transition:color .35s}
+.school::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .5s cubic-bezier(.2,.75,.15,1);z-index:-1}
+.school:hover{background:transparent;color:#fff}
+.school:hover::before{transform:none}
+/* шаги */
+.steps .step{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .7s cubic-bezier(.2,.75,.15,1)}
+.steps.in .step{opacity:1;transform:none}
+.steps.in .step:nth-child(2){transition-delay:.08s}.steps.in .step:nth-child(3){transition-delay:.16s}.steps.in .step:nth-child(4){transition-delay:.24s}
+/* FAQ: плавное раскрытие */
+.faq details p{animation:fade .35s ease}
+@media(prefers-reduced-motion:reduce){
+  .wm>span,.hero .lead,.hero .meta,.hero .cta-row,.hero .micro,.hero .box,.dirs .dir,.words .word,.steps .step,#promo-code span{transform:none!important;opacity:1!important;transition:none!important}
+  .sec-head::after{transform:none;transition:none}.cd-big b.tick{animation:none}.progress{display:none}
+}
+.fab{opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .3s,transform .4s cubic-bezier(.2,.75,.15,1)}
+.fab.show{opacity:1;transform:none;pointer-events:auto}
 </style>
 </head>
 <body>
@@ -458,6 +521,7 @@ select{padding-right:30px;text-overflow:ellipsis}
             <option>Архитектура</option>
             <option>Анимация</option>
             <option>Игры</option>
+            <option>Для подростков (Uteens)</option>
             <option>Пока не знаю — помогите выбрать</option>
           </select>
         </div>
@@ -835,6 +899,7 @@ select{padding-right:30px;text-overflow:ellipsis}
   const END   = new Date('2026-11-12T23:59:59+03:00');
   const YM_ID = null; // ← номер счётчика Яндекс.Метрики
 
+  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
   function goal(name,params){ try{ if(YM_ID && window.ym) ym(YM_ID,'reachGoal',name,params); if(window.dataLayer) dataLayer.push({event:name,...params}); }catch(e){} }
   $$('[data-goal]').forEach(el=>el.addEventListener('click',()=>goal(el.dataset.goal)));
@@ -853,7 +918,8 @@ select{padding-right:30px;text-overflow:ellipsis}
     if(target){ const diff=Math.max(0,target-now)/1000; d=Math.floor(diff/86400); h=Math.floor(diff%86400/3600); m=Math.floor(diff%3600/60); s=Math.floor(diff%60); }
     const short=(d?d+'д ':'')+pad(h)+':'+pad(m)+':'+pad(s);
     $('#tb-cd').textContent=short; $('#sticky-cd').textContent=(phase==='over'?'акция завершена':'до конца '+short);
-    $$('.cd-big').forEach(b=>{ $('[data-u=d]',b).textContent=d; $('[data-u=h]',b).textContent=pad(h); $('[data-u=m]',b).textContent=pad(m); $('[data-u=s]',b).textContent=pad(s); });
+    const setD=(el,v)=>{ v=String(v); if(el.textContent!==v){ el.textContent=v; el.classList.remove('tick'); void el.offsetWidth; el.classList.add('tick'); } };
+    $$('.cd-big').forEach(b=>{ setD($('[data-u=d]',b),d); setD($('[data-u=h]',b),pad(h)); setD($('[data-u=m]',b),pad(m)); setD($('[data-u=s]',b),pad(s)); });
   }
   tick(); setInterval(tick,1000);
 
@@ -880,6 +946,7 @@ select{padding-right:30px;text-overflow:ellipsis}
     el.innerHTML=`<span class="w${d.t.length>12?' long':''}">${d.t}</span><span class="n">${pad(i+1)}</span>`;
     el.addEventListener('click',()=>{show(i);goal('direction_click',{dir:d.t}); $('.dir-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}); box.appendChild(el); });
   function show(i){ cur=(i+dirs.length)%dirs.length; const d=dirs[cur];
+    const pnl=$('.dir-panel'); if(pnl && !RM){ pnl.classList.add('swap'); setTimeout(()=>pnl.classList.remove('swap'),120); }
     $$('.dir',box).forEach((b,j)=>b.classList.toggle('on',j===cur));
     $('#d-num').textContent=pad(cur+1); $('#d-title').textContent=d.t; $('#d-text').textContent=d.d;
     $('#d-list').innerHTML=d.l.map(x=>`<li>${x}</li>`).join(''); }
@@ -905,8 +972,14 @@ select{padding-right:30px;text-overflow:ellipsis}
   const fmt=n=>Math.round(n).toLocaleString('ru-RU').replace(/[\s,]/g,'\u00a0')+'\u00a0₽';
   const tiers=[[100000,5000],[200000,10000],[300000,20000],[400000,30000],[500000,40000],[Infinity,50000]];
   const inp=$('#c-price'), rng=$('#c-range');
+  const tw={};
+  function tween(sel,to,pre){ const el=$(sel); const from=tw[sel]??to; tw[sel]=to;
+    if(RM||from===to){ el.textContent=pre+fmt(to); return; }
+    const t0=performance.now(), D=380; cancelAnimationFrame(el._raf);
+    const step=t=>{ const k=Math.min(1,(t-t0)/D), e=1-Math.pow(1-k,3); el.textContent=pre+fmt(Math.round((from+(to-from)*e)/100)*100); if(k<1) el._raf=requestAnimationFrame(step); else el.textContent=pre+fmt(to); };
+    el._raf=requestAnimationFrame(step); }
   function calc(v){ v=Math.max(0,v||0); const idx=tiers.findIndex(t=>v<t[0]); const disc=v>0?Math.min(v,tiers[idx][1]):0;
-    $('#o-price').textContent=fmt(v); $('#o-disc').textContent='−'+fmt(disc); $('#o-total').textContent=fmt(v-disc);
+    tween('#o-price',v,''); tween('#o-disc',disc,'−'); tween('#o-total',v-disc,'');
     $$('#tiers .tier').forEach((t,i)=>t.classList.toggle('on',i===idx&&disc>0));
     $('#o-equiv').textContent='';
     $('#calc-cta').textContent=disc?`Зафиксировать скидку −${fmt(disc)}`:'Узнать условия'; }
@@ -960,7 +1033,42 @@ select{padding-right:30px;text-overflow:ellipsis}
   /* ─── FAB, sticky, анимации, скролл ─── */
   $('#fab-btn').addEventListener('click',()=>$('#fab').classList.toggle('open'));
   $('#sticky-contact').addEventListener('click',()=>$('#fab').classList.toggle('open'));
-  const sticky=$('#sticky'); addEventListener('scroll',()=>sticky.classList.toggle('show',scrollY>innerHeight*.9),{passive:true});
+  const sticky=$('#sticky'), fab=$('#fab'); const onS=()=>{ const on=scrollY>innerHeight*.9; sticky.classList.toggle('show',on); fab.classList.toggle('show',on); if(!on) fab.classList.remove('open'); }; addEventListener('scroll',onS,{passive:true}); onS();
+
+  /* ─── Анимации ─── */
+  // заголовок первого экрана: слова выезжают по очереди
+  if(!RM){ const h1=$('.hero h1'); let i=0;
+    [...h1.childNodes].forEach(n=>{
+      if(n.nodeType===3){ const frag=document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(w=>{ if(!w) return; if(/^\s+$/.test(w)){frag.appendChild(document.createTextNode(w));return;}
+          const o=document.createElement('span'); o.className='wm'; const inn=document.createElement('span'); inn.textContent=w; inn.style.transitionDelay=(0.08*i++)+'s'; o.appendChild(inn); frag.appendChild(o); });
+        n.replaceWith(frag);
+      } else { const o=document.createElement('span'); o.className='wm'; n.replaceWith(o); n.style.transitionDelay=(0.08*i++)+'s'; n.style.display='inline-block'; o.appendChild(n); }
+    });
+    requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('loaded')));
+  } else document.body.classList.add('loaded');
+
+  // промокод: буквы поднимаются по одной
+  const pc=$('#promo-code'); if(pc && !RM){ pc.innerHTML=[...pc.textContent].map((c,i)=>`<span style="transition-delay:${.06*i}s">${c}</span>`).join(''); }
+
+  // счётчики в цифрах
+  function countUp(el){ const m=el.textContent.match(/^(\d(?:[\d\s\u00a0]*\d)?)([\s\S]*)$/); if(!m) return;
+    const to=parseInt(m[1].replace(/\D/g,'')), rest=m[2], sp=/[\s\u00a0]/.test(m[1]);
+    const from=(to>1900&&to<2100)?to-30:0, t0=performance.now(), D=1400;
+    const f=n=>sp?n.toLocaleString('ru-RU').replace(/[\s,]/g,' '):String(n);
+    const step=t=>{ const k=Math.min(1,(t-t0)/D), e=1-Math.pow(1-k,4); el.textContent=f(Math.round(from+(to-from)*e))+rest; if(k<1) requestAnimationFrame(step); else el.textContent=f(to)+rest; };
+    requestAnimationFrame(step); }
+  if(!RM){ const so=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){ $$('.stat b',en.target).forEach(countUp); so.unobserve(en.target);} }),{threshold:.35});
+    const st=$('.stats'); if(st) so.observe(st); }
+
+  // тонкая полоса прогресса прокрутки
+  const bar=document.createElement('div'); bar.className='progress'; document.body.appendChild(bar);
+  addEventListener('scroll',()=>{ const h=document.documentElement.scrollHeight-innerHeight; bar.style.transform=`scaleX(${h>0?scrollY/h:0})`; },{passive:true});
+
+  // бегущая строка ускоряется от прокрутки
+  const tr=$('.marquee .track'); if(tr && !RM){ let last=scrollY, boost=0;
+    addEventListener('scroll',()=>{ boost=Math.min(4,boost+Math.abs(scrollY-last)/120); last=scrollY; },{passive:true});
+    (function loop(){ boost*=0.92; tr.style.animationDuration=(40/(1+boost))+'s'; requestAnimationFrame(loop); })(); }
   const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('in'); io.unobserve(en.target);} }),{threshold:.1});
   $$('.reveal').forEach(el=>io.observe(el));
   const marks={25:0,50:0,75:0,100:0}; addEventListener('scroll',()=>{ const p=(scrollY+innerHeight)/document.body.scrollHeight*100; for(const k in marks) if(!marks[k]&&p>=k){marks[k]=1;goal('scroll_'+k);} },{passive:true});
