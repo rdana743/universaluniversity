@@ -226,8 +226,9 @@ input[type=range]{width:100%;accent-color:#000;height:30px}
 .promo{display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;margin-top:70px;border:2px solid var(--ink);padding:34px 40px}
 .promo .code{font-family:var(--x);font-weight:900;font-size:clamp(54px,8vw,130px);line-height:1;letter-spacing:.01em}
 .promo-btns{display:flex;gap:14px;flex-wrap:wrap}
-.schools{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:70px}
-.school{display:flex;flex-direction:column;justify-content:space-between;min-height:230px;border:2px solid var(--ink);padding:30px;text-decoration:none;transition:background .2s,color .2s}
+.schools{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:70px}
+@media(max-width:1200px){.schools{grid-template-columns:repeat(2,1fr)}}
+.school{display:flex;flex-direction:column;justify-content:space-between;min-height:210px;border:2px solid var(--ink);padding:26px;text-decoration:none;transition:background .2s,color .2s}
 .school:hover{background:var(--ink);color:#fff}
 .school h3{font-weight:500;text-transform:uppercase;font-size:clamp(20px,1.8vw,26px);line-height:1.1;letter-spacing:.02em}
 .school .bot{display:flex;justify-content:space-between;align-items:flex-end;font-size:14px;letter-spacing:.06em}
@@ -622,6 +623,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
       <a class="school" href="https://screamschool.ru" target="_blank" rel="noopener" data-goal="go_scream"><h3>Scream School</h3><div class="bot"><span>screamschool.ru</span><span class="arr">↗</span></div></a>
       <a class="school" href="https://march.ru" target="_blank" rel="noopener" data-goal="go_march"><h3>Архитектурная школа МАРШ</h3><div class="bot"><span>march.ru</span><span class="arr">↗</span></div></a>
       <a class="school" href="https://msca.ru" target="_blank" rel="noopener" data-goal="go_msca"><h3>Московская школа современного искусства</h3><div class="bot"><span>msca.ru</span><span class="arr">↗</span></div></a>
+      <a class="school" href="https://uteens.ru" target="_blank" rel="noopener" data-goal="go_uteens"><h3>Uteens</h3><div class="bot"><span>uteens.ru · для подростков</span><span class="arr">↗</span></div></a>
     </div>
   </div>
 </section>
@@ -649,7 +651,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
   <div class="wrap final-grid">
     <div class="reveal">
       <div class="caps" style="opacity:.7">Финал · Проверить можно только одним способом</div>
-      <h2 style="margin-top:20px">Поставьте свой <span class="outline">эксперимент</span></h2>
+      <h2 style="margin-top:20px">Проведите свой <span class="outline">эксперимент</span></h2>
       <p class="lead" style="margin-top:24px;opacity:.85">11 ноября в 23:59 (мск) скидки закончатся. Оставьте заявку — закрепим за вами промокод и поможем выбрать программу.</p>
     </div>
     <div class="box reveal">
