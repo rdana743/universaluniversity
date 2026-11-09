@@ -1,0 +1,12 @@
+// Конфигурация Cloudflare Worker для приёма заявок с лендинга.
+// Используется, если Worker подключён к этому GitHub-репозиторию (Workers Builds).
+// Секреты TG_TOKEN и TG_CHAT_ID задаются только в панели Cloudflare.
+{
+  "name": "uu-leads",
+  "main": "worker/telegram-lead.js",
+  "compatibility_date": "2025-01-01",
+  "keep_vars": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://rdana743.github.io"
+  }
+}
