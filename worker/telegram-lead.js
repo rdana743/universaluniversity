@@ -60,13 +60,12 @@ export default {
       .join('\n');
 
     const lines = [
-      '🔬 <b>Новая заявка — Всемирный день науки</b>',
+      `🔬 <b>Заявка: ${esc(d.direction || 'направление не выбрано')}</b>`,
+      'Всемирный день науки · промокод НАУКА',
       '',
       `<b>Имя:</b> ${esc(name)}`,
       `<b>Телефон:</b> +${phone}`,
-      d.direction ? `<b>Направление:</b> ${esc(d.direction)}` : null,
       d.quiz ? `<b>Ответы теста:</b> ${esc(d.quiz)}` : null,
-      `<b>Промокод:</b> ${esc(d.promo || 'НАУКА')}`,
       '',
       `<b>Где оставил:</b> ${esc(SOURCES[d.source] || d.source)}`,
       utm ? `<b>UTM:</b>\n${utm}` : null,

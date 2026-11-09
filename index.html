@@ -883,6 +883,7 @@ select{padding-right:30px;text-overflow:ellipsis}
   const LEAD_ENDPOINT = '';
   const YM_ID = null; // ← номер счётчика Яндекс.Метрики
 
+  let lastDir='';
   const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const typo=t=>{ let p; do{ p=t; t=t.replace(/(^|[\s(«])(в|и|с|к|о|а|у|я|на|по|до|за|не|из|от|об|во|со|ко|но|же|ли|для|при|без|над|под|про|что|как|или|это|—) (?=\S)/gi,'$1$2 '); }while(p!==t); return t.replace(/(\S) —/g,'$1\u00a0—'); };
   const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
@@ -930,19 +931,20 @@ select{padding-right:30px;text-overflow:ellipsis}
   const box=$('#dirs'); let cur=0;
   dirs.forEach((d,i)=>{ const el=document.createElement('button'); el.className='dir';
     el.innerHTML=`<span class="w">${typo(d.t)}</span><span class="n">${pad(i+1)}</span>`;
-    el.addEventListener('click',()=>{show(i);goal('direction_click',{dir:d.t}); $('.dir-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}); box.appendChild(el); });
+    el.addEventListener('click',()=>{show(i); lastDir=d.t;goal('direction_click',{dir:d.t}); $('.dir-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}); box.appendChild(el); });
   function show(i){ cur=(i+dirs.length)%dirs.length; const d=dirs[cur];
     const pnl=$('.dir-panel'); if(pnl && !RM){ pnl.classList.add('swap'); setTimeout(()=>pnl.classList.remove('swap'),120); }
     $$('.dir',box).forEach((b,j)=>b.classList.toggle('on',j===cur));
     $('#d-num').textContent=pad(cur+1); $('#d-title').textContent=typo(d.t); $('#d-text').textContent=typo(d.d);
     $('#d-list').innerHTML=d.l.map(x=>`<li>${typo(x)}</li>`).join(''); }
-  $('#d-prev').onclick=()=>show(cur-1); $('#d-next').onclick=()=>show(cur+1); show(0);
-  $('#d-cta').addEventListener('click',()=>{ const s=$('#lead select'); if(s) s.value=dirs[cur].t; });
+  $('#d-prev').onclick=()=>{show(cur-1); lastDir=dirs[cur].t;}; $('#d-next').onclick=()=>{show(cur+1); lastDir=dirs[cur].t;}; show(0);
+  $('#d-cta').addEventListener('click',()=>{ const s=$('#lead select'); lastDir=dirs[cur].t; if(s) s.value=lastDir; });
+  $$('.lead-form select[name=direction]').forEach(sel=>sel.addEventListener('change',()=>{ if(sel.value) lastDir=sel.value; }));
 
   /* ─── Квиз ─── */
   const ans=[], steps=$$('.q-step'), bars=$$('.q-progress i');
   steps.forEach((st,i)=>$$('button',st).forEach(b=>b.addEventListener('click',()=>{
-    ans[i]=b.dataset.v; st.classList.remove('on'); bars[i].classList.add('on');
+    ans[i]=b.dataset.v; if(i===0 && b.dataset.v!=='any') lastDir=b.dataset.v; st.classList.remove('on'); bars[i].classList.add('on');
     if(steps[i+1]) steps[i+1].classList.add('on'); else result(); goal('quiz_step_'+(i+1));
   })));
   function result(){
@@ -1012,6 +1014,8 @@ select{padding-right:30px;text-overflow:ellipsis}
     if(!ok) return;
     const data=Object.fromEntries(new FormData(f)); data.source=f.dataset.source; data.promo='НАУКА'; data.page=location.href; Object.assign(data,utm);
     delete data.agree; data.agree=true;
+    if(!data.direction) data.direction = (f.dataset.source==='quiz' && ans[0] && ans[0]!=='any') ? ans[0] : (lastDir||'');
+    if(data.direction) data.direction=data.direction.replace(/\u00a0/g,' ');
     const btn=f.querySelector('button[type=submit]'); const label=btn.textContent; btn.disabled=true; btn.textContent='Отправляем…';
     try{ await sendLead(data); }
     catch(err){ try{ await new Promise(r=>setTimeout(r,1200)); await sendLead(data); }
