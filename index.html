@@ -522,6 +522,30 @@ select{padding-right:30px;text-overflow:ellipsis}
 /* единый приём акцента в тексте: тот же вес, фирменный синий */
 .accent{color:var(--blue)}
 .final .accent{color:#8A8AFF}
+/* направления: список слева, карточка выбранного направления справа */
+.dir-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.dir-layout .dirs{display:block}
+.dir-layout .dir{width:100%;margin:0;padding:18px 0;border-bottom:2px solid var(--rule)}
+.dir-layout .dir:first-child{border-top:2px solid var(--rule)}
+.dir-layout .dir:nth-child(2){border-top:0}
+.dir-layout .dir .w,.dir-layout .dir .w:not(.long){font-size:clamp(34px,4.2vw,68px)}
+.dir-layout .dir .n{font-size:13px}
+.dir-layout .dir.on .n{color:var(--blue)}
+.dir-layout .dir.on .n::after{content:" →";}
+.dir-side{position:sticky;top:110px}
+.dir-side .dir-panel{display:flex;flex-direction:column;gap:18px;margin:0;padding:32px;background:var(--bg-2)}
+.dir-panel .num{font-size:52px}
+.dir-panel h3{font-size:clamp(26px,2.4vw,36px)!important}
+.dir-panel ul{margin-top:6px}
+.dir-panel .act{min-width:0;margin-top:6px}
+@media(max-width:900px){
+  .dir-layout{grid-template-columns:minmax(0,1fr)}
+  .dir-side{display:none}
+  .dirs .dir-panel{display:flex;flex-direction:column;gap:14px;margin:0;padding:22px 20px 24px;background:var(--bg-2);border-bottom:2px solid var(--rule);animation:fade .3s}
+  .dir-panel .num{font-size:36px}
+  .dir-layout .dir .w,.dir-layout .dir .w:not(.long){font-size:clamp(32px,10vw,56px)}
+}
+@media(max-width:900px){.dirs .dir-panel .num,.dirs .dir-panel #d-title,.dirs .dir-panel .caps.muted{display:none}}
 </style>
 </head>
 <body>
@@ -645,8 +669,9 @@ select{padding-right:30px;text-overflow:ellipsis}
       <h2>А что, если попробовать <span class="accent">новое</span>?</h2>
       <p class="lead muted" style="margin-top:20px">Что вам хочется создавать&nbsp;— пространства, образы, музыку или истории? Выберите то, что откликается, и&nbsp;найдите программу, с&nbsp;которой начнётся ваше знакомство с&nbsp;новым делом.</p>
     </div>
+    <div class="dir-layout">
     <div class="dirs reveal" id="dirs"></div>
-    <div class="dir-panel reveal">
+    <aside class="dir-side"><div class="dir-panel" id="dir-panel">
       <div class="num"><span id="d-num">01</span><span> / 08</span></div>
       <div>
         <div class="caps muted">Направление исследования</div>
@@ -658,6 +683,7 @@ select{padding-right:30px;text-overflow:ellipsis}
         <a class="btn" href="#lead" id="d-cta" data-goal="direction_cta">Хочу сюда со скидкой</a>
         <div class="dir-nav"><button id="d-prev" aria-label="Назад">←</button><button id="d-next" aria-label="Вперёд">→</button></div>
       </div>
+    </div></aside>
     </div>
     <p class="note">Скидка действует на все программы 1–2 семестра 2026/27 учебного года вне зависимости от даты старта.</p>
   </div>
@@ -950,11 +976,14 @@ select{padding-right:30px;text-overflow:ellipsis}
   dirs.forEach((d,i)=>{ const el=document.createElement('button'); el.className='dir';
     el.innerHTML=`<span class="w">${typo(d.t)}</span><span class="n">${pad(i+1)}</span>`;
     el.addEventListener('click',()=>{show(i); lastDir=d.t;goal('direction_click',{dir:d.t}); $('.dir-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}); box.appendChild(el); });
+  const side=$('.dir-side'), panelEl=$('#dir-panel'), mq=matchMedia('(max-width:900px)');
+  function placePanel(){ const rows=$$('.dir',box); if(mq.matches){ rows[cur].after(panelEl); } else if(panelEl.parentElement!==side){ side.appendChild(panelEl); } }
+  mq.addEventListener?mq.addEventListener('change',placePanel):mq.addListener(placePanel);
   function show(i){ cur=(i+dirs.length)%dirs.length; const d=dirs[cur];
     const pnl=$('.dir-panel'); if(pnl && !RM){ pnl.classList.add('swap'); setTimeout(()=>pnl.classList.remove('swap'),120); }
     $$('.dir',box).forEach((b,j)=>b.classList.toggle('on',j===cur));
     $('#d-num').textContent=pad(cur+1); $('#d-title').textContent=typo(d.t); $('#d-text').textContent=typo(d.d);
-    $('#d-list').innerHTML=d.l.map(x=>`<li>${typo(x)}</li>`).join(''); }
+    $('#d-list').innerHTML=d.l.map(x=>`<li>${typo(x)}</li>`).join(''); placePanel(); }
   $('#d-prev').onclick=()=>{show(cur-1); lastDir=dirs[cur].t;}; $('#d-next').onclick=()=>{show(cur+1); lastDir=dirs[cur].t;}; show(0);
   $('#d-cta').addEventListener('click',()=>{ const s=$('#lead select'); lastDir=dirs[cur].t; if(s) s.value=lastDir; });
   $$('.lead-form select[name=direction]').forEach(sel=>sel.addEventListener('change',()=>{ if(sel.value) lastDir=sel.value; }));
