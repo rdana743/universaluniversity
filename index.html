@@ -475,6 +475,8 @@ select{padding-right:30px;text-overflow:ellipsis}
 .school .bot b{display:block;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;line-height:1.3;margin-bottom:4px}
 .school .bot small{display:block;font-size:13px;opacity:.6;letter-spacing:.02em}
 @media(max-width:600px){.school .slogo{height:80px}.school .slogo svg{height:calc(var(--lh)*.85)}}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+.lead-form button[disabled]{opacity:.6;cursor:wait}
 </style>
 </head>
 <body>
@@ -536,22 +538,23 @@ select{padding-right:30px;text-overflow:ellipsis}
       </div>
       <h3>Закрепите скидку до&nbsp;50&nbsp;000&nbsp;₽</h3>
       <p class="s">Оставьте телефон — консультант позвонит, поможет выбрать программу и применит промокод.</p>
-      <form class="lead-form" data-source="hero" novalidate>
+      <form class="lead-form" autocomplete="on" data-source="hero" novalidate>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
         <div class="f"><input type="text" name="name" placeholder="Как вас зовут" autocomplete="given-name" required></div>
         <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required></div>
         <div class="f">
           <select name="direction">
             <option value="">Какое направление вас интересует?</option>
-            <option>Искусство</option>
-            <option>Дизайн</option>
-            <option>Бизнес и маркетинг</option>
-            <option>Музыка</option>
-            <option>Кино</option>
-            <option>Архитектура</option>
-            <option>Анимация</option>
-            <option>Игры</option>
-            <option>Для подростков (Uteens)</option>
-            <option>Пока не знаю — помогите выбрать</option>
+            <option value="Искусство">Искусство</option>
+            <option value="Дизайн">Дизайн</option>
+            <option value="Бизнес и маркетинг">Бизнес и маркетинг</option>
+            <option value="Музыка">Музыка</option>
+            <option value="Кино">Кино</option>
+            <option value="Архитектура">Архитектура</option>
+            <option value="Анимация">Анимация</option>
+            <option value="Игры">Игры</option>
+            <option value="Для подростков (Uteens)">Для подростков (Uteens)</option>
+            <option value="Пока не знаю — помогите выбрать">Пока не знаю — помогите выбрать</option>
           </select>
         </div>
         <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных и получение звонка по акции</label>
@@ -695,7 +698,8 @@ select{padding-right:30px;text-overflow:ellipsis}
           <span class="caps-b">Подборка готова</span>
           <h3>Получите список программ со скидкой</h3>
           <p class="s">Консультант пришлёт подходящие программы и подтвердит размер скидки по промокоду НАУКА.</p>
-          <form class="lead-form" data-source="quiz" novalidate>
+          <form class="lead-form" autocomplete="on" data-source="quiz" novalidate>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
             <input type="hidden" name="quiz">
             <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
             <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
@@ -798,7 +802,8 @@ select{padding-right:30px;text-overflow:ellipsis}
         <div><b data-u="m">00</b><span>мин</span></div>
         <div><b data-u="s">00</b><span>сек</span></div>
       </div>
-      <form class="lead-form" data-source="final" novalidate>
+      <form class="lead-form" autocomplete="on" data-source="final" novalidate>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
         <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
         <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
         <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных</label>
@@ -856,7 +861,8 @@ select{padding-right:30px;text-overflow:ellipsis}
     <span class="caps-b">Подождите</span>
     <h3 id="modal-title">Не теряйте скидку до&nbsp;50&nbsp;000&nbsp;₽</h3>
     <p class="s">Оставьте номер — напомним о старте акции и закрепим за вами промокод <b>НАУКА</b>.</p>
-    <form class="lead-form" data-source="exit" novalidate>
+    <form class="lead-form" autocomplete="on" data-source="exit" novalidate>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
       <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
       <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
       <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных</label>
@@ -873,6 +879,8 @@ select{padding-right:30px;text-overflow:ellipsis}
   /* ─── Настройки ─── */
   const START = new Date('2026-11-10T00:00:00+03:00');
   const END   = new Date('2026-11-12T23:59:59+03:00');
+  // Адрес Cloudflare Worker, который пересылает заявки в Telegram (см. worker/README.md)
+  const LEAD_ENDPOINT = '';
   const YM_ID = null; // ← номер счётчика Яндекс.Метрики
 
   const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -988,8 +996,12 @@ select{padding-right:30px;text-overflow:ellipsis}
 
   /* ─── Отправка заявок: подключите CRM / Bitrix24 / amoCRM / Telegram-бота ─── */
   async function sendLead(data){
-    // пример: await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-    console.log('LEAD',data);
+    if(!LEAD_ENDPOINT){ console.warn('LEAD_ENDPOINT не задан — заявка не отправлена',data); return; }
+    const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),12000);
+    try{
+      const r=await fetch(LEAD_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data),signal:ctrl.signal});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+    } finally { clearTimeout(t); }
   }
   $$('.lead-form').forEach(f=>f.addEventListener('submit',async e=>{
     e.preventDefault(); let ok=true;
@@ -999,7 +1011,11 @@ select{padding-right:30px;text-overflow:ellipsis}
     if(agree&&!agree.checked){ok=false;toast('Нужно согласие на обработку данных');}
     if(!ok) return;
     const data=Object.fromEntries(new FormData(f)); data.source=f.dataset.source; data.promo='НАУКА'; data.page=location.href; Object.assign(data,utm);
-    try{ await sendLead(data); }catch(err){}
+    delete data.agree; data.agree=true;
+    const btn=f.querySelector('button[type=submit]'); const label=btn.textContent; btn.disabled=true; btn.textContent='Отправляем…';
+    try{ await sendLead(data); }
+    catch(err){ try{ await new Promise(r=>setTimeout(r,1200)); await sendLead(data); }
+      catch(err2){ btn.disabled=false; btn.textContent=label; toast('Не удалось отправить. Позвоните: 8 800 777-85-35'); goal('lead_error',{source:f.dataset.source}); return; } }
     f.parentElement.classList.add('sent'); goal('lead_sent',{source:f.dataset.source});
     try{ localStorage.setItem('nauka_lead','1'); }catch(err){}
   }));
