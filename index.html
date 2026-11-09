@@ -513,6 +513,10 @@ select{padding-right:30px;text-overflow:ellipsis}
 #lead input[type=text],#lead input[type=tel],#lead select{padding:14px 0}
 #lead .consent{margin:14px 0 16px}
 @media(max-width:1000px){.hero-grid>div:first-child{display:block}.hero .meta{margin-top:34px}.hero h1{margin-bottom:24px}}
+/* бегущая строка: компактно на всех экранах */
+.marquee{padding:18px 0;margin-top:56px;border-top:2px solid var(--rule);border-bottom:2px solid var(--rule)}
+.marquee .track{font-size:clamp(34px,5.2vw,80px);line-height:1.05}
+@media(max-width:600px){.marquee{margin-top:40px;padding:12px 0}.marquee .track{font-size:clamp(28px,9vw,40px)}}
 </style>
 </head>
 <body>
@@ -651,26 +655,6 @@ select{padding-right:30px;text-overflow:ellipsis}
       </div>
     </div>
     <p class="note">Скидка действует на все программы 1–2 семестра 2026/27 учебного года вне зависимости от даты старта.</p>
-  </div>
-</section>
-
-<!-- ═══ От гипотезы к действию ═══ -->
-<section id="action">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="caps muted">От гипотезы к действию</div>
-      <h2 style="margin-top:20px;max-width:1150px">Может ли одна идея стать началом чего-то большего?</h2>
-      <p class="lead" style="margin-top:26px">Здесь учатся у практиков индустрии, пробуют инструменты руками, получают честную обратную связь и выходят с собственными проектами в портфолио.</p>
-    </div>
-    <div class="words reveal">
-      <div class="word"><div class="caps muted">Шаг A</div><div class="w">Пробовать</div><p>Задания с первой недели — теория сразу превращается в практику.</p></div>
-      <div class="word"><div class="caps muted">Шаг B</div><div class="w">Ошибаться</div><p>Ошибка — тоже результат эксперимента. Наставники помогают разобрать её и двигаться дальше.</p></div>
-      <div class="word"><div class="caps muted">Шаг C</div><div class="w">Создавать</div><p>Свои проекты, которые не стыдно показать работодателю или заказчику.</p></div>
-    </div>
-    <div class="strip reveal">
-      <p><b>10–12 ноября 2026</b> — скидки до <b>50&nbsp;000&nbsp;₽</b> на все программы 1–2 семестра 2026/27 учебного года</p>
-      <a class="btn inv" href="#calc" data-goal="strip_calc">Посчитать свою выгоду</a>
-    </div>
   </div>
 </section>
 
