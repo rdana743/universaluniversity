@@ -372,6 +372,7 @@ input[type=range]{accent-color:var(--blue)}
 .final .box .btn.accent{width:100%}
 .fab-main{background:var(--blue);border-color:var(--blue)}
 .fab-main:hover{background:var(--ink);border-color:var(--ink)}
+.dir .w.long{font-size:clamp(28px,3.7vw,58px);white-space:nowrap}
 </style>
 </head>
 <body>
@@ -441,7 +442,7 @@ input[type=range]{accent-color:var(--blue)}
             <option value="">Какое направление вас интересует?</option>
             <option>Искусство</option>
             <option>Дизайн</option>
-            <option>Маркетинг</option>
+            <option>Бизнес и маркетинг</option>
             <option>Музыка</option>
             <option>Кино</option>
             <option>Архитектура</option>
@@ -584,7 +585,7 @@ input[type=range]{accent-color:var(--blue)}
           <button data-v="Архитектура">Архитектура и городская среда</button>
           <button data-v="Анимация">Анимация, 3D, моушн</button>
           <button data-v="Игры">Игры: геймдизайн, концепт-арт</button>
-          <button data-v="Маркетинг">Маркетинг и бренды в креативных индустриях</button>
+          <button data-v="Бизнес и маркетинг">Бизнес и маркетинг</button>
           <button data-v="any">Пока не знаю — хочу понять своё</button>
         </div>
       </div>
@@ -855,7 +856,7 @@ input[type=range]{accent-color:var(--blue)}
   const dirs=[
     {t:'Искусство',s:'art',d:'Современное искусство, живопись, иллюстрация, кураторство и управление арт-проектами.',l:['Современное искусство','Кураторство','Арт-менеджмент']},
     {t:'Дизайн',s:'design',d:'Графический, интерьерный, предметный дизайн, мода и интерфейсы.',l:['Графический дизайн','Дизайн интерьера','UX/UI','Мода']},
-    {t:'Маркетинг',s:'design',d:'Бренд-коммуникации, креатив в рекламе и продвижение в креативных индустриях.',l:['Бренд-менеджмент','Креатив в рекламе','Digital']},
+    {t:'Бизнес и маркетинг',s:'design',d:'Бренд-коммуникации, продвижение и креативное мышление в бизнесе.',l:['Бренд-менеджмент','Креативные подходы','Управление продуктом']},
     {t:'Музыка',s:'music',d:'Профориентация в музыке, музыкальный продюсер, сонграйтер, музыкальный бизнес и звукорежиссёр.',l:['Написание песен','Создание музыки','Продюсирование','Вокал','Музыкальный маркетинг и продвижение']},
     {t:'Кино',s:'film',d:'Режиссура, сценарий, операторское мастерство, актёрское мастерство и продюсирование.',l:['Режиссура','Сценарий','Продюсирование']},
     {t:'Архитектура',s:'design',d:'Архитектурное проектирование, урбанистика и работа с пространством.',l:['Архитектура','Урбанистика','Ландшафт']},
@@ -864,7 +865,7 @@ input[type=range]{accent-color:var(--blue)}
   ];
   const box=$('#dirs'); let cur=0;
   dirs.forEach((d,i)=>{ const el=document.createElement('button'); el.className='dir';
-    el.innerHTML=`<span class="w">${d.t}</span><span class="n">${pad(i+1)}</span>`;
+    el.innerHTML=`<span class="w${d.t.length>12?' long':''}">${d.t}</span><span class="n">${pad(i+1)}</span>`;
     el.addEventListener('click',()=>{show(i);goal('direction_click',{dir:d.t}); $('.dir-panel').scrollIntoView({behavior:'smooth',block:'nearest'});}); box.appendChild(el); });
   function show(i){ cur=(i+dirs.length)%dirs.length; const d=dirs[cur];
     $$('.dir',box).forEach((b,j)=>b.classList.toggle('on',j===cur));
