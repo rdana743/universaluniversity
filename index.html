@@ -496,6 +496,23 @@ select{padding-right:30px;text-overflow:ellipsis}
   .hero .meta div b{font-size:clamp(17px,5vw,21px)}}
 @media(max-width:340px){.hero .meta div b{font-size:16px}.hero .meta div span{font-size:11px}}
 @media(max-width:980px){.tb-long{display:none}.topbar .wrap{gap:6px 12px;padding-top:8px;padding-bottom:8px}.topbar .wrap a{flex-basis:100%}}
+/* первый экран: левая и правая колонки одной высоты */
+.hero-grid{align-items:stretch}
+.hero-grid>div:first-child{display:flex;flex-direction:column}
+.hero h1{font-size:clamp(44px,6.4vw,108px);line-height:.98;margin:0 0 34px}
+.hero .lead{font-size:clamp(19px,1.75vw,27px);line-height:1.45;max-width:760px}
+.hero .meta{margin-top:auto}
+#lead.box{padding:30px 32px;display:flex;flex-direction:column}
+#lead .caps-b{margin-bottom:18px;align-self:flex-start}
+#lead .cd-title{margin-bottom:8px}
+#lead .cd-big{margin-bottom:20px}
+#lead .cd-big div{padding:10px 4px}
+#lead .cd-big b{font-size:clamp(24px,2.2vw,30px)}
+#lead h3{font-size:clamp(20px,1.7vw,24px);margin-bottom:6px}
+#lead p.s{font-size:15px;margin-bottom:8px}
+#lead input[type=text],#lead input[type=tel],#lead select{padding:14px 0}
+#lead .consent{margin:14px 0 16px}
+@media(max-width:1000px){.hero-grid>div:first-child{display:block}.hero .meta{margin-top:34px}.hero h1{margin-bottom:24px}}
 </style>
 </head>
 <body>
@@ -550,7 +567,7 @@ select{padding-right:30px;text-overflow:ellipsis}
         <div><b data-u="s">00</b><span>сек</span></div>
       </div>
       <h3>Закрепите скидку до&nbsp;50&nbsp;000&nbsp;₽</h3>
-      <p class="s">Оставьте телефон — консультант позвонит, поможет выбрать программу и применит промокод.</p>
+      <p class="s">Перезвоним, поможем выбрать программу и&nbsp;применим промокод.</p>
       <form class="lead-form" autocomplete="on" data-source="hero" novalidate>
             <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
         <div class="f"><input type="text" name="name" placeholder="Как вас зовут" autocomplete="given-name" required></div>
@@ -570,9 +587,8 @@ select{padding-right:30px;text-overflow:ellipsis}
             <option value="Пока не знаю — помогите выбрать">Пока не знаю — помогите выбрать</option>
           </select>
         </div>
-        <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных и получение звонка по акции</label>
+        <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на&nbsp;обработку персональных данных</label>
         <button class="btn accent full" type="submit">Забронировать скидку</button>
-        <div class="micro">Перезвоним в рабочее время, без спама</div>
       </form>
       <div class="form-ok">
         <div class="big">Заявка принята</div>
@@ -910,7 +926,7 @@ select{padding-right:30px;text-overflow:ellipsis}
   function tick(){
     const now=new Date(); let target=null, phase;
     if(now<=END){target=END;phase=now<START?'before':'live';} else phase='over';
-    const titles={before:'До конца акции · старт 10 ноября',live:'До конца акции',over:'Акция завершена'};
+    const titles={before:'До конца акции',live:'До конца акции',over:'Акция завершена'};
     $('#tb-text').innerHTML = phase==='over'?'Акция завершена':'До конца акции<span class="tb-long"> «Всемирный день науки»</span>';
     $$('.cd-title').forEach(e=>e.textContent=titles[phase]);
     let d=0,h=0,m=0,s=0;
