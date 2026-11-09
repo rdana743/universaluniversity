@@ -59,7 +59,7 @@ Settings → Pages → Source: `Deploy from a branch`, ветка `main`, пап
 | `header_cta`, `topbar_cta`, `sticky_cta` | Кнопки «Получить / Забронировать скидку» (шапка, верхняя полоса, нижняя панель на телефоне) |
 | `nav_how`, `nav_directions`, `nav_calc`, `nav_faq` | Пункты меню |
 | `contact_open`, `sticky_contact` | Открыли меню «Связаться» |
-| `msg_tg`, `msg_max`, `call` | Telegram, MAX, звонок |
+| `call` | Звонок |
 | `callback_open`, `callback_modal_open` | «Перезвоните мне» |
 | `exit_modal_open` | Показано окно при уходе со страницы |
 
