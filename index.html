@@ -32,7 +32,7 @@ h1{font-size:clamp(40px,6.2vw,96px);letter-spacing:.015em}
 h2{font-size:clamp(34px,4.4vw,68px)}
 h3{font-size:clamp(22px,2vw,30px);font-weight:500}
 .x{font-family:var(--x);font-weight:900;letter-spacing:-.01em;line-height:1}
-.outline{color:transparent;-webkit-text-stroke:1.5px var(--ink);font-weight:300}
+.outline,.dir .w,.word .w{--oc:var(--ink);--of:var(--bg);color:var(--of);font-weight:300;text-shadow:1.2px 0 var(--oc),-1.2px 0 var(--oc),0 1.2px var(--oc),0 -1.2px var(--oc),.85px .85px var(--oc),-.85px -.85px var(--oc),.85px -.85px var(--oc),-.85px .85px var(--oc);transition:color .2s}
 .blue{color:var(--blue)}
 .lead{font-size:clamp(19px,1.7vw,26px);line-height:1.55;max-width:1100px}
 .muted{color:var(--ink-2)}
@@ -134,9 +134,9 @@ input.err{border-bottom-color:#D7261E;color:#D7261E}
 .dirs{display:grid;grid-template-columns:1fr 1fr;column-gap:40px}
 .dir{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:2px solid var(--rule);padding:22px 0;cursor:pointer;background:none;border-top:0;border-left:0;border-right:0;text-align:left;font:inherit;color:inherit;width:100%}
 .dir:nth-child(-n+2){border-top:2px solid var(--rule)}
-.dir .w{font-size:clamp(46px,6.2vw,104px);line-height:1.08;font-weight:300;color:transparent;-webkit-text-stroke:1.4px var(--ink);transition:color .2s}
-.dir:hover .w,.dir.on .w{color:var(--ink);-webkit-text-stroke:1.4px var(--ink)}
-.dir.on .w{color:var(--blue);-webkit-text-stroke-color:var(--blue)}
+.dir .w{font-size:clamp(46px,6.2vw,104px);line-height:1.08}
+.dir:hover .w{color:var(--ink)}
+.dir.on .w{--oc:var(--blue);color:var(--blue)}
 .dir .n{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);white-space:nowrap}
 @media(max-width:800px){.dirs{grid-template-columns:1fr}.dir:nth-child(2){border-top:0}}
 .dir-panel{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:start;margin-top:40px;padding:34px;background:var(--bg-2)}
@@ -154,7 +154,7 @@ input.err{border-bottom-color:#D7261E;color:#D7261E}
 /* action */
 .words{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin:50px 0}
 .word{border-top:2px solid var(--rule);padding-top:24px}
-.word .w{font-size:clamp(40px,4.6vw,76px);line-height:1;margin:14px 0 18px;font-weight:300;color:transparent;-webkit-text-stroke:1.3px var(--ink);transition:color .2s}
+.word .w{font-size:clamp(40px,4.6vw,76px);line-height:1;margin:14px 0 18px}
 .word:hover .w{color:var(--ink)}
 .word p{color:var(--ink-2);font-size:17px}
 @media(max-width:800px){.words{grid-template-columns:1fr}}
@@ -246,7 +246,7 @@ input[type=range]{width:100%;accent-color:#000;height:30px}
 
 /* final */
 .final{background:var(--ink);color:#fff}
-.final .outline{-webkit-text-stroke-color:#fff}
+.final .outline{--oc:#fff;--of:var(--ink)}
 .final-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(30px,5vw,80px);align-items:center}
 .final .box{border-color:#fff}
 .final .box{color:var(--ink)}
@@ -412,9 +412,8 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 <section id="directions">
   <div class="wrap">
     <div class="reveal" style="margin-bottom:50px">
-      <div class="caps muted">02 · Карта возможностей</div>
-      <h2 style="margin-top:20px">А что, если попробовать <span class="outline">новое</span>?</h2>
-      <p class="lead muted" style="margin-top:20px">Восемь направлений Universal University. Нажмите на любое — покажем, чему там учат.</p>
+      <h2>А что, если попробовать <span class="outline">новое</span>?</h2>
+      <p class="lead muted" style="margin-top:20px">Что вам хочется создавать&nbsp;— пространства, образы, музыку или истории? Выберите то, что откликается, и&nbsp;найдите программу, с&nbsp;которой начнётся ваше знакомство с&nbsp;новым делом.</p>
     </div>
     <div class="dirs reveal" id="dirs"></div>
     <div class="dir-panel reveal">
