@@ -290,6 +290,88 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.marquee .track{animation:none}html{scroll-behavior:auto}}
+
+/* ═══ АКЦЕНТЫ: фирменный синий u.university ═══ */
+:root{--blue:#2B2BD9;--blue-d:#1E1EB0;--blue-l:#EEEFFD}
+/* кнопки отправки форм и главные CTA — синие */
+.btn.accent{background:var(--blue);border-color:var(--blue);color:#fff}
+.btn.accent:hover{background:var(--ink);border-color:var(--ink)}
+/* таймеры */
+.topbar{background:var(--blue)}
+.topbar .cd{background:#fff;color:var(--blue);border-color:#fff}
+.topbar a:hover{color:#fff;opacity:.8}
+.cd-big{border-color:var(--blue);background:var(--blue)}
+.cd-big div{border-right-color:#ffffff40}
+.cd-big b{color:#fff;font-size:34px}
+.cd-big span{color:#ffffffb3}
+.cd-title{color:var(--blue)!important;font-weight:600}
+.box .caps-b{background:var(--blue)}
+.sticky-cta{background:var(--blue)}
+.sticky-cta .btn.inv{color:var(--blue)}
+/* первый экран */
+.meta div b{font-size:24px}
+.meta div:first-child b{color:var(--blue);font-family:var(--x);font-weight:900;font-size:26px}
+.hero h1 .q-mark{color:var(--blue)}
+/* шаги и промокод */
+.step::before{color:var(--blue)}
+.step.key{background:var(--blue);color:#fff;padding:24px;border-top-color:var(--blue)}
+.step.key::before{color:#fff}
+.step.key p{color:#ffffffcc}
+.promo{background:var(--blue);border-color:var(--blue);color:#fff}
+.promo .caps{color:#ffffffb3!important}
+.promo .btn{background:#fff;color:var(--blue);border-color:#fff}
+.promo .btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.promo .btn.line{background:transparent;color:#fff}
+.promo .btn.line:hover{background:#fff;color:var(--blue);border-color:#fff}
+/* направления */
+.dir{transition:background .2s;padding-left:16px;padding-right:16px;margin:0 -16px;width:calc(100% + 32px)}
+.dir:hover{background:var(--blue-l)}
+.dir:hover .w{--oc:var(--blue);color:var(--blue)}
+.dir.on{background:var(--blue)}
+.dir.on .w{--oc:#fff;color:#fff}
+.dir.on .n{color:#ffffffcc}
+.dir-panel{background:var(--blue);color:#fff}
+.dir-panel .muted,.dir-panel .num span{color:#ffffffb3!important}
+.dir-panel .btn{background:#fff;color:var(--blue);border-color:#fff}
+.dir-panel .btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dir-nav button{border-color:#fff;color:#fff}
+.dir-nav button:hover{background:#fff;color:var(--blue)}
+/* три слова */
+.word:hover .w{--oc:var(--blue);color:var(--blue)}
+.word .caps{color:var(--blue)!important;font-weight:600}
+.strip{background:var(--blue)}
+.strip .btn.inv{color:var(--blue)}
+.strip .btn.inv:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* квиз — синий блок */
+.quiz{background:var(--blue);color:#fff}
+.quiz>.muted,.quiz .lead.muted,.quiz .caps.muted{color:#ffffffbf!important}
+.q-progress i{background:#ffffff40}.q-progress i.on{background:#fff}
+.q-opts button{color:#fff;border-top-color:#ffffff66}
+.q-opts button:hover{color:#fff;background:#ffffff14}
+.q-res .match{color:#fff}
+.q-res a.restart{color:#fff}
+.quiz .box{color:var(--ink);border-color:#fff}
+.quiz .box .muted{color:var(--ink-2)!important}
+/* калькулятор */
+.calc-out{background:var(--blue-l);padding:10px 30px 30px}
+.row.total .v{color:var(--blue)}
+.tier.on{background:var(--blue);border-color:var(--blue)}
+.tiers{border-color:var(--blue)}.tier{border-right-color:var(--blue)}
+input[type=range]{accent-color:var(--blue)}
+.price-input{border-bottom-color:var(--blue)}
+/* цифры доверия */
+.stat b{color:var(--blue)}
+/* школы */
+.school:hover{background:var(--blue);border-color:var(--blue)}
+.school .arr{color:var(--blue)}
+.school:hover .arr{color:#fff}
+/* FAQ, условия, финал */
+.faq details[open] summary{color:var(--blue)}
+.faq summary::after{color:var(--blue)}
+.terms li::before{color:var(--blue)}
+.final .box .btn.accent{width:100%}
+.fab-main{background:var(--blue);border-color:var(--blue)}
+.fab-main:hover{background:var(--ink);border-color:var(--ink)}
 </style>
 </head>
 <body>
@@ -313,7 +395,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
       <a href="#calc">Калькулятор</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <a class="btn" href="#lead" data-goal="header_cta">Получить скидку</a>
+    <a class="btn accent" href="#lead" data-goal="header_cta">Получить скидку</a>
   </div>
 </header>
 
@@ -324,7 +406,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
   <div class="wrap hero-grid">
     <div>
       <div class="caps muted">01 / Hypothesis X / Y · Проверено на практике</div>
-      <h1>А что, если получится?</h1>
+      <h1>А что, если получится<span class="q-mark">?</span></h1>
       <p class="lead">Что, если ваше увлечение может стать профессией, а&nbsp;идея&nbsp;— началом нового дела? Наука начинается с&nbsp;эксперимента. Ваше открытие может начаться с&nbsp;обучения.</p>
       <p class="lead muted" style="margin-top:18px;font-size:clamp(17px,1.3vw,20px)">Ко Всемирному дню науки школы Universal University приглашают исследовать свои возможности: выбрать новое направление, освоить первые навыки и увидеть, куда они могут привести. А в честь праздника стоимость обучения станет ниже — чтобы решиться на новое было легче.</p>
       <div class="meta caps">
@@ -334,7 +416,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
         <div><span>Промокод</span><b class="blue">НАУКА</b></div>
       </div>
       <div class="cta-row">
-        <a class="btn" href="#directions" data-goal="hero_programs">Выбрать программу ↗</a>
+        <a class="btn accent" href="#directions" data-goal="hero_programs">Выбрать программу ↗</a>
         <a class="btn line" href="#quiz" data-goal="hero_quiz">Подобрать за 1 минуту</a>
       </div>
       <div class="micro">Консультация бесплатная и ни к чему не обязывает</div>
@@ -369,7 +451,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
           </select>
         </div>
         <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных и получение звонка по акции</label>
-        <button class="btn full" type="submit">Забронировать скидку</button>
+        <button class="btn accent full" type="submit">Забронировать скидку</button>
         <div class="micro">Перезвоним в рабочее время, без спама</div>
       </form>
       <div class="form-ok">
@@ -541,7 +623,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
             <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
             <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
             <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных</label>
-            <button class="btn full" type="submit">Получить подборку</button>
+            <button class="btn accent full" type="submit">Получить подборку</button>
           </form>
           <div class="form-ok"><div class="big">Готово</div><p>Скоро пришлём подборку. Промокод:</p><div class="code">НАУКА</div></div>
         </div>
@@ -581,7 +663,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
         <div class="row disc"><span class="caps">Скидка по промокоду</span><span class="v" id="o-disc">−30&nbsp;000&nbsp;₽</span></div>
         <div class="row total" style="border-bottom:2px solid var(--ink);margin-bottom:20px"><span class="caps">Итого</span><span class="v" id="o-total">320&nbsp;000&nbsp;₽</span></div>
         <p class="equiv" id="o-equiv"></p>
-        <a class="btn full" href="#lead" data-goal="calc_cta" id="calc-cta">Зафиксировать скидку</a>
+        <a class="btn accent full" href="#lead" data-goal="calc_cta" id="calc-cta">Зафиксировать скидку</a>
         <div class="micro">Заявку нужно подать 10–11 ноября 2026 включительно</div>
       </div>
     </div>
@@ -667,7 +749,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
         <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
         <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
         <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных</label>
-        <button class="btn full" type="submit">Хочу скидку</button>
+        <button class="btn accent full" type="submit">Хочу скидку</button>
       </form>
       <div class="form-ok"><div class="big">Принято</div><p>Скоро позвоним. Ваш промокод:</p><div class="code">НАУКА</div></div>
     </div>
@@ -725,7 +807,7 @@ footer{background:var(--bg-2);padding:70px 0 130px}
       <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
       <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
       <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных</label>
-      <button class="btn full" type="submit">Закрепить скидку</button>
+      <button class="btn accent full" type="submit">Закрепить скидку</button>
     </form>
     <div class="form-ok"><div class="big">Сохранили</div><p>Напомним 10 ноября. Промокод:</p><div class="code">НАУКА</div></div>
   </div>
