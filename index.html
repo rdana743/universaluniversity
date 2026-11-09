@@ -82,7 +82,7 @@ header.nav .wrap{display:flex;justify-content:space-between;align-items:center;g
 @media(max-width:1000px){.hero-grid{grid-template-columns:1fr}}
 
 .marquee{overflow:hidden;white-space:nowrap;padding:60px 0 20px;margin-top:70px}
-.marquee .track{display:inline-block;animation:mq 40s linear infinite;font-size:clamp(80px,14vw,230px);line-height:1;text-transform:uppercase}
+.marquee .track{display:inline-block;will-change:transform;animation:mq 40s linear infinite;font-size:clamp(80px,14vw,230px);line-height:1;text-transform:uppercase}
 @keyframes mq{to{transform:translateX(-50%)}}
 
 /* form box */
@@ -446,6 +446,21 @@ select{padding-right:30px;text-overflow:ellipsis}
 }
 .fab{opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .3s,transform .4s cubic-bezier(.2,.75,.15,1)}
 .fab.show{opacity:1;transform:none;pointer-events:auto}
+.stat b{white-space:nowrap}
+.stat span{display:block;max-width:440px}
+/* правки по аудиту переполнений */
+.faq summary::after{flex:none;width:28px;height:28px;display:grid;place-items:center;font-size:32px;line-height:1;transform-origin:50% 50%}
+.dir .w:not(.long){font-size:clamp(40px,5.2vw,86px)}
+.word .w{font-size:clamp(36px,4.1vw,64px)}
+@media(max-width:900px){.dirs{grid-template-columns:minmax(0,1fr)}.words{grid-template-columns:minmax(0,1fr);gap:28px}}
+@media(max-width:600px){.dir .w:not(.long){font-size:clamp(34px,11.5vw,56px)}}
+@media(max-width:380px){h2{font-size:clamp(26px,8.4vw,34px)}.exp-top{flex-wrap:wrap;gap:6px}.answers button{font-size:12px;letter-spacing:.04em;padding:14px 6px}}
+.faq details[open] summary::after{content:"\2212";transform:none}
+.faq summary::after{transition:none}
+/* цифры: крупное число + подпись */
+.stats .stat b{font-size:clamp(56px,7vw,116px);line-height:.95;margin-bottom:16px}
+.stats .stat span{font-size:clamp(16px,1.3vw,20px);color:var(--ink-2)}
+@media(max-width:600px){.stats .stat b{font-size:clamp(52px,16vw,72px)}}
 </style>
 </head>
 <body>
@@ -755,9 +770,9 @@ select{padding-right:30px;text-overflow:ellipsis}
       </div>
     </div>
     <div class="stats reveal">
-      <div class="stat"><b>2003 год</b><span>запуск первой британской программы бакалавриата</span></div>
-      <div class="stat"><b>2018 год</b><span>объединение школ в Universal University</span></div>
-      <div class="stat"><b>200+ преподавателей</b><span>успешные российские и зарубежные практики</span></div>
+      <div class="stat"><b>2003</b><span>запуск первой британской программы бакалавриата</span></div>
+      <div class="stat"><b>2018</b><span>объединение школ в Universal University</span></div>
+      <div class="stat"><b>200+</b><span>преподавателей — успешные российские и зарубежные практики</span></div>
       <div class="stat"><b>10 000 м²</b><span>площадь кампуса университета</span></div>
     </div>
     <!-- Блок отзывов скрыт до появления реальных отзывов. Чтобы включить: уберите комментарий и замените тексты.
@@ -1065,10 +1080,15 @@ select{padding-right:30px;text-overflow:ellipsis}
   const bar=document.createElement('div'); bar.className='progress'; document.body.appendChild(bar);
   addEventListener('scroll',()=>{ const h=document.documentElement.scrollHeight-innerHeight; bar.style.transform=`scaleX(${h>0?scrollY/h:0})`; },{passive:true});
 
-  // бегущая строка ускоряется от прокрутки
-  const tr=$('.marquee .track'); if(tr && !RM){ let last=scrollY, boost=0;
-    addEventListener('scroll',()=>{ boost=Math.min(4,boost+Math.abs(scrollY-last)/120); last=scrollY; },{passive:true});
-    (function loop(){ boost*=0.92; tr.style.animationDuration=(40/(1+boost))+'s'; requestAnimationFrame(loop); })(); }
+  // бегущая строка: плавное движение на transform, прокрутка мягко ускоряет
+  const tr=$('.marquee .track');
+  if(tr && !RM){ tr.style.animation='none'; let x=0, last=scrollY, boost=0, prev=performance.now(), half=0, vis=true;
+    const measure=()=>{ half=tr.scrollWidth/2; }; measure(); addEventListener('resize',measure);
+    new IntersectionObserver(es=>{ vis=es[0].isIntersecting; },{rootMargin:'200px'}).observe(tr);
+    addEventListener('scroll',()=>{ const d=Math.abs(scrollY-last); last=scrollY; boost=Math.min(3,boost+d*0.015); },{passive:true});
+    (function loop(t){ const dt=Math.min(50,t-prev); prev=t;
+      if(vis && half){ boost+= (0-boost)*Math.min(1,dt/400); x-= (0.06+boost*0.12)*dt; if(-x>=half) x+=half; tr.style.transform=`translate3d(${x}px,0,0)`; }
+      requestAnimationFrame(loop); })(prev); }
   const io=new IntersectionObserver(es=>es.forEach(en=>{ if(en.isIntersecting){en.target.classList.add('in'); io.unobserve(en.target);} }),{threshold:.1});
   $$('.reveal').forEach(el=>io.observe(el));
   const marks={25:0,50:0,75:0,100:0}; addEventListener('scroll',()=>{ const p=(scrollY+innerHeight)/document.body.scrollHeight*100; for(const k in marks) if(!marks[k]&&p>=k){marks[k]=1;goal('scroll_'+k);} },{passive:true});
