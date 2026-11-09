@@ -291,87 +291,42 @@ footer{background:var(--bg-2);padding:70px 0 130px}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.marquee .track{animation:none}html{scroll-behavior:auto}}
 
-/* ═══ АКЦЕНТЫ: фирменный синий u.university ═══ */
-:root{--blue:#2B2BD9;--blue-d:#1E1EB0;--blue-l:#EEEFFD}
-/* кнопки отправки форм и главные CTA — синие */
-.btn.accent{background:var(--blue);border-color:var(--blue);color:#fff}
-.btn.accent:hover{background:var(--ink);border-color:var(--ink)}
-/* таймеры */
-.topbar{background:var(--blue)}
-.topbar .cd{background:#fff;color:var(--blue);border-color:#fff}
-.topbar a:hover{color:#fff;opacity:.8}
-.cd-big{border-color:var(--blue);background:var(--blue)}
-.cd-big div{border-right-color:#ffffff40}
+/* ═══ АКЦЕНТЫ — сдержанно, в духе u.university ═══
+   Монохром: чёрный / белый / серый + тонкие линии.
+   Синий (цвет ссылок u.university) — только точечно: промокод, скидка, наведение. */
+:root{--blue:#2B2BD9}
+.btn.accent{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn.accent:hover{background:var(--blue);border-color:var(--blue)}
+/* таймеры — чёрные ячейки, белые цифры */
+.cd-big{background:var(--ink);border-color:var(--ink)}
+.cd-big div{border-right-color:#ffffff33;padding:14px 4px}
 .cd-big b{color:#fff;font-size:34px}
-.cd-big span{color:#ffffffb3}
-.cd-title{color:var(--blue)!important;font-weight:600}
-.box .caps-b{background:var(--blue)}
-.sticky-cta{background:var(--blue)}
-.sticky-cta .btn.inv{color:var(--blue)}
-/* первый экран */
-.meta div b{font-size:24px}
-.meta div:first-child b{color:var(--blue);font-family:var(--x);font-weight:900;font-size:26px}
-.hero h1 .q-mark{color:var(--blue)}
-/* шаги и промокод */
-.step::before{color:var(--blue)}
-.step.key{background:var(--blue);color:#fff;padding:24px;border-top-color:var(--blue)}
-.step.key::before{color:#fff}
-.step.key p{color:#ffffffcc}
-.promo{background:var(--blue);border-color:var(--blue);color:#fff}
-.promo .caps{color:#ffffffb3!important}
-.promo .btn{background:#fff;color:var(--blue);border-color:#fff}
-.promo .btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.promo .btn.line{background:transparent;color:#fff}
-.promo .btn.line:hover{background:#fff;color:var(--blue);border-color:#fff}
-/* направления */
-.dir{transition:background .2s;padding-left:16px;padding-right:16px;margin:0 -16px;width:calc(100% + 32px)}
-.dir:hover{background:var(--blue-l)}
-.dir:hover .w{--oc:var(--blue);color:var(--blue)}
-.dir.on{background:var(--blue)}
-.dir.on .w{--oc:#fff;color:#fff}
-.dir.on .n{color:#ffffffcc}
-.dir-panel{background:var(--blue);color:#fff}
-.dir-panel .muted,.dir-panel .num span{color:#ffffffb3!important}
-.dir-panel .btn{background:#fff;color:var(--blue);border-color:#fff}
-.dir-panel .btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.dir-nav button{border-color:#fff;color:#fff}
-.dir-nav button:hover{background:#fff;color:var(--blue)}
-/* три слова */
-.word:hover .w{--oc:var(--blue);color:var(--blue)}
-.word .caps{color:var(--blue)!important;font-weight:600}
-.strip{background:var(--blue)}
-.strip .btn.inv{color:var(--blue)}
-.strip .btn.inv:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-/* квиз — синий блок */
-.quiz{background:var(--blue);color:#fff}
-.quiz>.muted,.quiz .lead.muted,.quiz .caps.muted{color:#ffffffbf!important}
-.q-progress i{background:#ffffff40}.q-progress i.on{background:#fff}
-.q-opts button{color:#fff;border-top-color:#ffffff66}
-.q-opts button:hover{color:#fff;background:#ffffff14}
-.q-res .match{color:#fff}
-.q-res a.restart{color:#fff}
-.quiz .box{color:var(--ink);border-color:#fff}
-.quiz .box .muted{color:var(--ink-2)!important}
-/* калькулятор */
-.calc-out{background:var(--blue-l);padding:10px 30px 30px}
-.row.total .v{color:var(--blue)}
-.tier.on{background:var(--blue);border-color:var(--blue)}
-.tiers{border-color:var(--blue)}.tier{border-right-color:var(--blue)}
-input[type=range]{accent-color:var(--blue)}
-.price-input{border-bottom-color:var(--blue)}
-/* цифры доверия */
-.stat b{color:var(--blue)}
-/* школы */
-.school:hover{background:var(--blue);border-color:var(--blue)}
-.school .arr{color:var(--blue)}
-.school:hover .arr{color:#fff}
-/* FAQ, условия, финал */
-.faq details[open] summary{color:var(--blue)}
-.faq summary::after{color:var(--blue)}
-.terms li::before{color:var(--blue)}
-.final .box .btn.accent{width:100%}
-.fab-main{background:var(--blue);border-color:var(--blue)}
-.fab-main:hover{background:var(--ink);border-color:var(--ink)}
+.cd-big span{color:#ffffff99}
+.final .box .cd-big{background:var(--ink)}
+/* первый экран: акцент только на промокоде */
+.meta div b.blue{color:var(--blue)}
+/* промокод — главный чёрный блок */
+.promo{background:var(--ink);border-color:var(--ink);color:#fff;padding:44px 48px}
+.promo .caps{color:#ffffff99!important}
+.promo .code{letter-spacing:.02em}
+.promo .btn{background:#fff;color:var(--ink);border-color:#fff}
+.promo .btn:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.promo .btn.line{background:transparent;color:#fff;border-color:#ffffff80}
+.promo .btn.line:hover{background:#fff;color:var(--ink);border-color:#fff}
+.step.key::before{color:var(--blue)}
+/* направления: выбранное — сплошной чёрный, наведение — синий */
+.dir:hover .w{--oc:var(--blue);color:var(--bg)}
+.dir.on .w{--oc:var(--ink);color:var(--ink)}
+.dir-panel .num span{color:var(--ink-2)}
+/* калькулятор: синим только скидка */
+.row.disc .v{color:var(--blue)}
+.tier.on{background:var(--ink)}
+/* школы и FAQ */
+.school .arr{transition:transform .2s}
+.school:hover .arr{transform:translate(3px,-3px)}
+.faq details[open] summary{color:var(--ink)}
+.foot a.logo{line-height:1;display:inline-block}
+.stat b{font-size:clamp(40px,4.2vw,72px)}
 .dir .w.long{font-size:clamp(28px,3.7vw,58px);white-space:nowrap}
 </style>
 </head>
@@ -550,7 +505,7 @@ input[type=range]{accent-color:var(--blue)}
 <section id="action">
   <div class="wrap">
     <div class="reveal">
-      <div class="caps muted">03 · От гипотезы к действию</div>
+      <div class="caps muted">От гипотезы к действию</div>
       <h2 style="margin-top:20px;max-width:1150px">Может ли одна идея стать началом чего-то большего?</h2>
       <p class="lead" style="margin-top:26px">Здесь учатся у практиков индустрии, пробуют инструменты руками, получают честную обратную связь и выходят с собственными проектами в портфолио.</p>
     </div>
@@ -570,7 +525,7 @@ input[type=range]{accent-color:var(--blue)}
 <section id="quiz" style="padding-top:0">
   <div class="wrap">
     <div class="quiz reveal">
-      <div class="caps muted">04 · Подбор за 3 вопроса</div>
+      <div class="caps muted">Подбор за 3 вопроса</div>
       <h2 style="margin-top:20px">Какой эксперимент ваш?</h2>
       <p class="lead muted" style="margin-top:16px">Ответьте на 3 вопроса — подскажем направление и закрепим за вами скидку.</p>
       <div class="q-progress"><i></i><i></i><i></i></div>
@@ -638,7 +593,7 @@ input[type=range]{accent-color:var(--blue)}
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <div class="caps muted">003 · Интерактивный расчёт</div>
+        <div class="caps muted">Калькулятор выгоды</div>
         <h2 style="margin-top:20px">Проверьте свою выгоду</h2>
       </div>
       <p class="muted" style="max-width:460px">Введите стоимость программы, которая вам интересна, — покажем, сколько можно сэкономить по промокоду.</p>
@@ -676,7 +631,7 @@ input[type=range]{accent-color:var(--blue)}
   <div class="wrap">
     <div class="sec-head reveal">
       <div>
-        <div class="caps muted">04.1 · Данные эксперимента</div>
+        <div class="caps muted">Данные эксперимента</div>
         <h2 style="margin-top:20px">Гипотеза уже подтверждалась</h2>
       </div>
     </div>
@@ -686,12 +641,14 @@ input[type=range]{accent-color:var(--blue)}
       <div class="stat"><b>200+ преподавателей</b><span>успешные российские и зарубежные практики</span></div>
       <div class="stat"><b>10 000 м²</b><span>площадь кампуса университета</span></div>
     </div>
-    <!-- TODO: вставить реальные отзывы выпускников (имя, программа, фото с согласия) и убрать класс ph -->
+    <!-- Блок отзывов скрыт до появления реальных отзывов. Чтобы включить: уберите комментарий и замените тексты.
+     TODO: вставить реальные отзывы выпускников (имя, программа, фото с согласия) и убрать класс ph 
     <div class="reviews reveal">
       <div class="review"><p class="ph">«Текст реального отзыва выпускника: с чем пришёл, что получил, где сейчас работает».</p><div class="who"><div class="av"></div><div><b class="ph">Имя Фамилия</b><small>Программа, год выпуска</small></div></div></div>
       <div class="review"><p class="ph">«Текст реального отзыва выпускника: с чем пришёл, что получил, где сейчас работает».</p><div class="who"><div class="av"></div><div><b class="ph">Имя Фамилия</b><small>Программа, год выпуска</small></div></div></div>
       <div class="review"><p class="ph">«Текст реального отзыва выпускника: с чем пришёл, что получил, где сейчас работает».</p><div class="who"><div class="av"></div><div><b class="ph">Имя Фамилия</b><small>Программа, год выпуска</small></div></div></div>
     </div>
+    -->
   </div>
 </section>
 
@@ -715,7 +672,7 @@ input[type=range]{accent-color:var(--blue)}
 <section id="faq" style="padding-top:0">
   <div class="wrap">
     <div class="reveal" style="margin-bottom:44px">
-      <div class="caps muted">06 · Частые вопросы</div>
+      <div class="caps muted">Частые вопросы</div>
       <h2 style="margin-top:20px">Остались сомнения?</h2>
     </div>
     <div class="faq reveal">
@@ -733,7 +690,7 @@ input[type=range]{accent-color:var(--blue)}
 <section class="final" id="final">
   <div class="wrap final-grid">
     <div class="reveal">
-      <div class="caps" style="opacity:.7">Финал · Проверить можно только одним способом</div>
+      <div class="caps" style="opacity:.7">Проверить можно только одним способом</div>
       <h2 style="margin-top:20px">Проведите свой <span class="outline">эксперимент</span></h2>
       <p class="lead" style="margin-top:24px;opacity:.85">11 ноября в 23:59 (мск) скидки закончатся. Оставьте заявку — закрепим за вами промокод и поможем выбрать программу.</p>
     </div>
