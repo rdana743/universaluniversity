@@ -52,6 +52,7 @@ export default {
 
     const phone = String(d.phone || '').replace(/\D/g, '');
     const name = String(d.name || '').trim();
+    const email = String(d.email || '').trim().slice(0, 200);
     if (!name || phone.length < 11) return new Response('Invalid', { status: 422, headers });
 
     const utm = Object.entries(d)
@@ -65,6 +66,7 @@ export default {
       '',
       `<b>Имя:</b> ${esc(name)}`,
       `<b>Телефон:</b> +${phone}`,
+      email ? `<b>Email:</b> ${esc(email)}` : null,
       d.quiz ? `<b>Ответы теста:</b> ${esc(d.quiz)}` : null,
       '',
       `<b>Где оставил:</b> ${esc(SOURCES[d.source] || d.source)}`,

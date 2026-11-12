@@ -97,7 +97,7 @@ header.nav .wrap{display:flex;justify-content:space-between;align-items:center;g
 .cd-big span{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2)}
 .cd-title{margin-bottom:10px;color:var(--ink-2)}
 form .f{margin-bottom:12px}
-input[type=text],input[type=tel],select{width:100%;font:400 17px var(--b);letter-spacing:.02em;padding:18px 0;border:0;border-bottom:2px solid var(--ink);background:transparent;outline:none;border-radius:0;color:var(--ink);-webkit-appearance:none;appearance:none}
+input[type=text],input[type=tel],input[type=email],select{width:100%;font:400 17px var(--b);letter-spacing:.02em;padding:18px 0;border:0;border-bottom:2px solid var(--ink);background:transparent;outline:none;border-radius:0;color:var(--ink);-webkit-appearance:none;appearance:none}
 select{background-image:linear-gradient(45deg,transparent 50%,#000 50%),linear-gradient(135deg,#000 50%,transparent 50%);background-position:calc(100% - 14px) 26px,calc(100% - 8px) 26px;background-size:6px 6px;background-repeat:no-repeat}
 input:focus,select:focus{border-bottom-color:var(--blue)}
 input.err{border-bottom-color:#D7261E;color:#D7261E}
@@ -510,7 +510,7 @@ select{padding-right:30px;text-overflow:ellipsis}
 #lead .cd-big b{font-size:clamp(24px,2.2vw,30px)}
 #lead h3{font-size:clamp(20px,1.7vw,24px);margin-bottom:6px}
 #lead p.s{font-size:15px;margin-bottom:8px}
-#lead input[type=text],#lead input[type=tel],#lead select{padding:14px 0}
+#lead input[type=text],#lead input[type=tel],#lead input[type=email],#lead select{padding:14px 0}
 #lead .consent{margin:14px 0 16px}
 @media(max-width:1000px){.hero-grid>div:first-child{display:block}.hero .meta{margin-top:34px}.hero h1{margin-bottom:24px}}
 /* бегущая строка: компактно на всех экранах */
@@ -628,6 +628,7 @@ footer{padding-bottom:70px}
             <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
         <div class="f"><input type="text" name="name" placeholder="Как вас зовут" autocomplete="given-name" required></div>
         <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required></div>
+        <div class="f"><input type="email" name="email" placeholder="Email" autocomplete="email" inputmode="email" required></div>
         <div class="f">
           <select name="direction">
             <option value="">Какое направление вас интересует?</option>
@@ -817,6 +818,7 @@ footer{padding-bottom:70px}
             <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
       <div class="f"><input type="text" name="name" placeholder="Как вас зовут" required></div>
       <div class="f"><input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="f"><input type="email" name="email" placeholder="Email" autocomplete="email" inputmode="email" required></div>
       <label class="consent"><input type="checkbox" name="agree" checked required> Соглашаюсь на обработку персональных данных</label>
       <button class="btn accent full" type="submit">Закрепить скидку</button>
     </form>
@@ -973,9 +975,10 @@ footer{padding-bottom:70px}
   });
   $$('.lead-form').forEach(f=>f.addEventListener('submit',async e=>{
     e.preventDefault(); let ok=true;
-    const name=f.elements.name, phone=f.elements.phone, agree=f.elements.agree;
+    const name=f.elements.name, phone=f.elements.phone, email=f.elements.email, agree=f.elements.agree;
     if(!name.value.trim()){name.classList.add('err');ok=false;}
     if(phone.value.replace(/\D/g,'').length<11){phone.classList.add('err');ok=false;}
+    if(email){ email.value=email.value.trim(); if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value)){email.classList.add('err');ok=false;} }
     if(agree&&!agree.checked){ok=false;toast('Нужно согласие на обработку данных');}
     if(!ok){ goal('form_invalid_'+f.dataset.source); return; }
     const data=Object.fromEntries(new FormData(f)); data.source=f.dataset.source; data.promo='НАУКА'; data.page=location.href; Object.assign(data,utm);
@@ -991,7 +994,7 @@ footer{padding-bottom:70px}
     try{ if(window.ym) ym(YM_ID,'params',{lead:{source:f.dataset.source,direction:data.direction||'—'}}); }catch(e){}
     try{ localStorage.setItem('nauka_lead','1'); }catch(err){}
   }));
-  $$('input[type=text]').forEach(i=>i.addEventListener('input',()=>i.classList.remove('err')));
+  $$('input[type=text],input[type=email]').forEach(i=>i.addEventListener('input',()=>i.classList.remove('err')));
 
   /* ─── Модалка: exit-intent + обратный звонок ─── */
   const modal=$('#modal'); let shown=false;
