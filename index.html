@@ -511,6 +511,7 @@ select{padding-right:30px;text-overflow:ellipsis}
 #lead h3{font-size:clamp(20px,1.7vw,24px);margin-bottom:6px}
 #lead p.s{font-size:15px;margin-bottom:8px}
 #lead input[type=text],#lead input[type=tel],#lead input[type=email],#lead select{padding:14px 0}
+#lead select.pick{border-bottom-color:var(--blue);color:var(--blue)}
 #lead .consent{margin:14px 0 16px}
 @media(max-width:1000px){.hero-grid>div:first-child{display:block}.hero .meta{margin-top:34px}.hero h1{margin-bottom:24px}}
 /* бегущая строка: компактно на всех экранах */
@@ -633,7 +634,9 @@ footer{padding-bottom:70px}
           <select name="direction">
             <option value="">Какое направление вас интересует?</option>
             <option value="Искусство">Искусство</option>
-            <option value="Дизайн">Дизайн</option>
+            <option value="Мода и стиль">Мода и стиль</option>
+            <option value="Коммуникационный дизайн">Коммуникационный дизайн</option>
+            <option value="Пространственный дизайн">Пространственный дизайн</option>
             <option value="Бизнес и маркетинг">Бизнес и маркетинг</option>
             <option value="Музыка">Музыка</option>
             <option value="Кино">Кино</option>
@@ -901,8 +904,8 @@ footer{padding-bottom:70px}
     $('#d-num').textContent=pad(cur+1); $('#d-title').textContent=typo(d.t); $('#d-text').textContent=typo(d.d);
     $('#d-list').innerHTML=d.l.map(x=>`<li>${typo(x)}</li>`).join(''); placePanel(); }
   $('#d-prev').onclick=()=>{show(cur-1); lastDir=dirs[cur].t;}; $('#d-next').onclick=()=>{show(cur+1); lastDir=dirs[cur].t;}; show(0);
-  $('#d-cta').addEventListener('click',()=>{ const s=$('#lead select'); lastDir=dirs[cur].t; if(s) s.value=lastDir; });
-  $$('.lead-form select[name=direction]').forEach(sel=>sel.addEventListener('change',()=>{ if(sel.value) lastDir=sel.value; }));
+  $('#d-cta').addEventListener('click',()=>{ const s=$('#lead select'); lastDir=dirs[cur].t; if(s){ s.value=lastDir; if(!s.value){ s.classList.add('pick'); setTimeout(()=>s.focus({preventScroll:true}),700); } } });
+  $$('.lead-form select[name=direction]').forEach(sel=>sel.addEventListener('change',()=>{ if(sel.value){ lastDir=sel.value; sel.classList.remove('pick'); } }));
 
   /* ─── Квиз ─── */
   const ans=[], steps=$$('.q-step'), bars=$$('.q-progress i');
